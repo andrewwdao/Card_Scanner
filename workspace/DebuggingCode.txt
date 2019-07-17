@@ -1,0 +1,1 @@
+xtensa-esp32-elf-gdb ./build/CARD-SCANNER.elf -b 115200 -ex 'target remote COM5'

@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "workspace"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"typeinfo": "cpp",
+			"*.tcc": "cpp",
+			"fstream": "cpp",
+			"array": "cpp",
+			"initializer_list": "cpp",
+			"utility": "cpp",
+			"*.ipp": "cpp"
+		}
+	}
+}
