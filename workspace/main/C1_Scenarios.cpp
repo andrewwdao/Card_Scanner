@@ -316,26 +316,26 @@ void AddClass_init() {
     Frame2_init(OPT_2,AClass_getClass, AClass_make);
 }//end AddClass_init
 static void AClass_make(String* AClass, char* NumClass, char Anum) {//String array hold the classes, number of classes, the chosen class number
-    if (SD_checkClass(*(AClass+Anum))) {//if this class existed in the database
-        oled_AClass_override();
-        SW_setBoundaries(0,1,true); //min, max, loop enable
-        SW_set(NO);
-        SW_enable();
-        while (1) {
-            if (SW_posChanged()) {
-                switch (SW_read()) {
-                    case YES:  {oled_POINTER3();break;}
-                    case NO:   {oled_POINTER4();break;}
-                }//end switch case
-            }//end if
-            if (SW_midPressed()) { //if confirmed
-                switch (SW_read()) {
-                    case YES:  {break;}//move to the next part
-                    case NO:   {return;}//return to chose class
-                }//end switch case
-            }//end if
-        }//end while
-    }//end if
+    // if (SD_checkClass(*(AClass+Anum))) {//if this class existed in the database
+        //oled_AClass_override();
+    //     SW_setBoundaries(0,1,true); //min, max, loop enable
+    //     SW_set(NO);
+    //     SW_enable();
+    //     while (1) {
+    //         if (SW_posChanged()) {
+    //             switch (SW_read()) {
+    //                 case YES:  {oled_POINTER3();break;}
+    //                 case NO:   {oled_POINTER4();break;}
+    //             }//end switch case
+    //         }//end if
+    //         if (SW_midPressed()) { //if confirmed
+    //             switch (SW_read()) {
+    //                 case YES:  {break;}//move to the next part
+    //                 case NO:   {return;}//return to chose class
+    //             }//end switch case
+    //         }//end if
+    //     }//end while
+    // }//end if
     oled_connect(); //show oled screen
     if (!wifi_isConnected()) {wifi_STA_init();}
     //send request about the class to server

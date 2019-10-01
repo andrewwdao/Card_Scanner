@@ -68,3 +68,5 @@ tools/mkspiffs/mkspiffs.exe
 
 *.DB
 */ipch
+*.DB-shm
+*.DB-wal

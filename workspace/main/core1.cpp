@@ -195,6 +195,7 @@ static void Core1CombinedTask( void * parameter ) {//task run on core0
       oled_system_failed();
       while (!SW_midPressed());
       NVS_system_write(SYS_NORMAL);
+      NVS_AExMode_write(false); //default to be false
       ESP.restart();
       break;
     }//end case

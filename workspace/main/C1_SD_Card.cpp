@@ -56,7 +56,7 @@
 
 // ------ Private function prototypes -------------------------
 //static void SD_updateDatabase(String);
-static void SD_saveClass(String,String);
+static void SD_saveClass(String,String,String);
 static bool SD_ACheck_save(String,String);
 static void SD_renameFile(String,String);
 // ------ Private variables -----------------------------------
@@ -489,7 +489,7 @@ void SD_updateDatabase(String* DClass,
                 stuDone++;
               ////////////////if the whole class have been recorded
                 if (stuDone==stuDis) { //stuDis is more precise here compared to numOfStu
-                    SD_saveClass(buf.Class,"DONE!");
+                    SD_saveClass(ACHECK_LOCATION,buf.Class,"DONE!");
                     Frame1_ClasDel(ACLASS_LOCATION,DClass,NumClass,Dnum);//delete class
                     return;
                 }//end if
@@ -509,11 +509,11 @@ void SD_updateDatabase(String* DClass,
                 delay(700); //for user to see the information
                 break; //continue the process by breaking out of the while loop waiting for RFID
             }//end if
-            if (SW_midPressed()) {//cancel the process
+            if (SW_midPressed()) {// MID-PRESSED - cancel the process
              /////////////////////// IF CANCEL THE PROCESS DURING ADD CLASS TIME
               //////////////saving and displaying students that successfully added into the class
                 cBuffer = (String)mesBuf+" students left";
-                SD_saveClass(buf.Class,cBuffer); //save the class name to the system
+                SD_saveClass(ACLASS_LOCATION,buf.Class,cBuffer); //save the class name to the system
               /////////////////////save the remain students that didn't check in yet - use buffer file to sit between trasferation
                 File rootFile = SD.open(ACLASS_LOCATION+buf.Class+".txt", FILE_READ);
                 if((!rootFile)&&(rootFile.isDirectory())) {
@@ -604,9 +604,9 @@ bool SD_checkClass(String CLass) {
     return false;
 }//end SD_checkClass
 
-static void SD_saveClass(String clBuf,String mSTAT) {
+static void SD_saveClass(String Dir, String clBuf,String mSTAT) {
   ///////////////////////check if there is existing this class  
-    File SD_cFile = SD.open(ACHECK_LOCATION+"classes.txt", FILE_READ);
+    File SD_cFile = SD.open(Dir+"classes.txt", FILE_READ);
     if((!SD_cFile)&&(SD_cFile.isDirectory())) {
         D_PRINTLN(F("File not found!"));
         return;
@@ -626,7 +626,7 @@ static void SD_saveClass(String clBuf,String mSTAT) {
     }//end while
     SD_cFile.close();
   /////////////////////start add class if no existing of this class was found
-    SD_cFile = SD.open(ACHECK_LOCATION+"classes.txt", FILE_APPEND);
+    SD_cFile = SD.open(Dir+"classes.txt", FILE_APPEND);
     if((!SD_cFile)&&(SD_cFile.isDirectory())) {
         D_PRINTLN(F("File not found!"));
         return;
