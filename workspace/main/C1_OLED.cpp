@@ -409,7 +409,7 @@ void oled_Acheck_make() { //no oled.display!!!
   oled.setCursor(0,0); oled.println("Scanning Mode");
   oled.setTextColor(WHITE, BLACK); // normal text
   oled.setTextSize(2);
-  oled.setCursor(5,20); oled.print("Waiting...");
+  oled.setCursor(5,20); oled.print(MES_WAIT);
   oled.setTextSize(1);
   // oled_display(); //columm, row --- cot, hang
 }//end oled_Acheck_make

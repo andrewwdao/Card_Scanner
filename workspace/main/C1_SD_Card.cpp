@@ -438,7 +438,7 @@ void SD_updateDatabase(String* DClass,
         for (uint8_t mtemp=0;mtemp<9;mtemp++) { //safety method for the screen
             mesBuf[mtemp]='\0';
         }//end for
-        sprintf(mesBuf,"%d/%d",stuDis-stuDone,stuDis);
+        sprintf(mesBuf,"%d/%d  ",stuDis-stuDone,stuDis);
         oled_getRFID_info(buf.mssv,buf.name,mesBuf);
       //////////////////////
         //set boundaries for the switch
@@ -582,7 +582,7 @@ void SD_updateDatabase(String* DClass,
 
 // check if this class existed in the database or not
 bool SD_checkClass(String CLass) {
-    File SD_cFile = SD.open(ACHECK_LOCATION+"classes.txt", FILE_READ);
+    File SD_cFile = SD.open(ACLASS_LOCATION+"classes.txt", FILE_READ);
     if((!SD_cFile)&&(SD_cFile.isDirectory())) {
         D_PRINTLN(F("File not found!"));
         return false;
