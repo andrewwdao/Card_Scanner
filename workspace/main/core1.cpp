@@ -80,6 +80,7 @@ static void Core1CombinedTask( void * parameter ) {//task run on core0
       // -------------- RTC INITIALIZE ------------------------
       if (RTC_init()) {
         S_PRINT(F("Current time: ")); S_PRINTLN(RTC_getTime());
+        S_PRINTLN(RTC_getSecond());
         Clock_init(RTC_getSecond());//initialize timer appropriately for display time
       }
       //////////////////////////only in NORMAL mode/////////////////////////////////

@@ -87,6 +87,5 @@ void oled_AClass_override();
 
 // ------ Public variable -------------------------------------
 extern Adafruit_SH1106 oled;
-extern bool         ClockEnable;
 
 #endif //_C1_OLED_H

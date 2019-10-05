@@ -19,7 +19,7 @@
 
 
 // ------ Private constants -----------------------------------
-const int CLOCK_STACK   PROGMEM =  1000; // Stack size of Task1_CORE0 (in bytes- NOT words)
+const int CLOCK_STACK   PROGMEM =  2000; // Stack size of Task1_CORE0 (in bytes- NOT words)
 #define REPEAT    true
 #define NO_REPEAT false
 // ------ Private function prototypes -------------------------
@@ -36,6 +36,8 @@ TaskHandle_t Clock_handle; //pointer
 hw_timer_t *ClockTimer = NULL;
 //callback_t   Clock_callback = (callback_t) ClockISR;
 portMUX_TYPE ClockMux = portMUX_INITIALIZER_UNLOCKED;
+static bool ClockEnable=false;
+static bool clockActivate=false;
 // ------ PUBLIC variable definitions -------------------------
 //extern SemaphoreHandle_t Clock_baton;
 //--------------------------------------------------------------
@@ -82,25 +84,35 @@ bool Clock_init(uint8_t ClockSecond) {
 }//end Clock_init
 
 static void Clock_firstCycle( void * parameter ) {//task run on core0
-  timerStop(ClockTimer);
-  timerEnd(ClockTimer);
+  timerStop(ClockTimer);timerEnd(ClockTimer);
   ClockTimer = timerBegin(0, 80, true); //timer0, divided by 80 (1Mhz), counting up
   timerAttachInterrupt(ClockTimer, MainClockISR, true);
   timerAlarmWrite(ClockTimer, 60000000, REPEAT); // 60s, no repeat
   timerAlarmEnable(ClockTimer);
   if (ClockEnable) {
-      oled_Clock_Updater();
+    clockActivate = true;
   }//end if
   vTaskDelete(NULL);
 }//end Clock_firstCycle
 
 static void Clock_main( void * parameter ) {//task run on core0
   if (ClockEnable) {
-    oled_Clock_Updater();
+    clockActivate = true;
   }//end if
-
   vTaskDelete(NULL);
 }//end Clock_main
+void clockEnable() {
+  ClockEnable = true;
+}//end clockEnable
+void clockDisable() {
+  ClockEnable = false;
+}//end clockDisable
+bool clockIsActivated() {
+  return clockActivate;
+}//end clockIsActivated
+void clockDeactivate() {
+  clockActivate = false;
+}
 
 /*******************************************************************************************/
 #endif//_C1_CLOCK_CPP

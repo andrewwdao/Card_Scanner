@@ -293,7 +293,7 @@ char HTTP_getFrom(String* GClass,char* GnumCl,char Gnum) {
         deserializeJson(StudentData, data_received);
 
         //---INVOLVING SD CARD SAVING
-        SD_deleteClass(GClass, GnumCl, Gnum, ACHECK_LOCATION);//delete first
+        SD_deleteClass(GClass, GnumCl, Gnum, ACLASS_LOCATION);//delete first
         File SD_dataFile = SD.open(ACLASS_LOCATION+CClass+".txt", FILE_APPEND);
         if((!SD_dataFile)&&(SD_dataFile.isDirectory())) {
           D_PRINTLN(F("File not found!"));

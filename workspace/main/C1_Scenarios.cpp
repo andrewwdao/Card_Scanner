@@ -56,6 +56,7 @@ static bool l3starter=true;
 //### RTC UPDATER         --> C1_RTC_DS3231.cpp
 void Scenarios_update() { //MAIN SCENARIOS
     while (1) {
+        oled_Clock_Updater(); //display time 
         if (l1starter) {
             l1starter=false;
             l2starter=true;
@@ -320,28 +321,54 @@ static void AClass_make(String* AClass, char* NumClass, char Anum) {//String arr
     
     ///////////////////////////////////TESTING////////////////////////////////////
     if (SD_checkClass(*(AClass+Anum))) {//if this class existed in the database
-        oled_AClass_override();oled_POINTER4();
+        oled_clear();
+        oled_POINTER4();oled_AClass_override();
+        SW_disable();
         SW_setBoundaries(0,1,true); //min, max, loop enable
         SW_set(NO);
         SW_enable();
         while (1) {
             if (SW_posChanged()) {
                 switch (SW_read()) {
-                    case YES:  {oled_POINTER3();break;}
-                    case NO:   {oled_POINTER4();break;}
+                    case YES:  {oled_POINTER3();oled_AClass_override();break;}
+                    case NO:   {oled_POINTER4();oled_AClass_override();break;}
                 }//end switch case
             }//end if
             if (SW_midPressed()) { //if confirmed
                 switch (SW_read()) {
-                    case YES:  {break;}//move to the next part
+                    case YES:  {
+                        //Frame1_ClasDel(ACLASS_LOCATION,AClass, NumClass, Anum);
+                        oled_connect(); //show oled screen
+                        if (!wifi_isConnected()) {wifi_STA_init();}
+                        //send request about the class to server
+                            switch (HTTP_getFrom(AClass,NumClass,Anum)) { //connect and save the class into the database (including override file if existed)
+                                case GOOD: { //if connect sucessfully
+                                    SD_updateDatabase(AClass, NumClass, Anum);//update the file into database
+                                    return;
+                                }
+                                case NOTG: {//cannot recieve completed data from server
+                                    oled_get_error();
+                                    S_PRINTLN(MES_GER);
+                                    break;
+                                }
+                                case NO_WIFI: {//wifi failed
+                                    oled_wifi_failed();
+                                    S_PRINTLN(MES_WF_FAIL);
+                                    break;
+                                }
+                            }//end switch
+                        oled_comeBack();
+                        while (!SW_midPressed());
+                        NVS_system_write(SYS_NORMAL_DIRECT);
+                        ESP.restart();
+                        return; //l3starter flag is reset outside of this function
+                    }//move to the next part
                     case NO:   {return;}//return to chose class
                 }//end switch case
             }//end if
         }//end while
     }//end if
     ///////////////////////////////////////////////////////////////////////////////
-
-
     oled_connect(); //show oled screen
     if (!wifi_isConnected()) {wifi_STA_init();}
     //send request about the class to server

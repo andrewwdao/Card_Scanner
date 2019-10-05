@@ -22,6 +22,10 @@
 
 // ------ Public function prototypes --------------------------
 bool Clock_init(uint8_t); //need to put current second to this function to make it refresh exactly every minutes
+void clockEnable();
+void clockDisable();
+bool clockIsActivated();
+void clockDeactivate();
 /*
   xSemaphoreGive(Clock_baton);
   xSemaphoreTake(Clock_baton, portMAX_DELAY); // ( TickType_t ) and portTICK_PERIOD_MS is also available , view: http://esp32.info/docs/esp_idf/html/d1/d19/group__xSemaphoreTake.html 

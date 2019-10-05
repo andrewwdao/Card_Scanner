@@ -144,7 +144,7 @@ String RTC_getClock() {
   if ((tempHour>24)||(tempMin>60)) {return "";}
   String C_hour   = (tempHour>9)?((String)tempHour):('0'+(String)tempHour);
   String C_minute = (tempMin>9)?((String)tempMin):('0'+(String)tempMin);
-  return (C_hour + ':' + C_minute);
+  return (RTC_getDay() + '-' + C_hour + ':' + C_minute);
 }//end RTC_getClock
 
 uint8_t RTC_getSecond() {
