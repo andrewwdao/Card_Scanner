@@ -91,6 +91,8 @@ static const unsigned char PROGMEM ctu_logo[] = {
 
 // ------ Private function prototypes -------------------------
 void oled_display();
+void oled_showSession();
+
 // ------ Private variables -----------------------------------
 //static String preMSSV="";
 //static String preName="";
@@ -105,7 +107,7 @@ Adafruit_SH1106 oled(I2C_SDA_PIN, I2C_SCL_PIN);
 //------------------------------- SYSTEM FAILED FUNCTION -------------------------------------
 //------------------------------------------------------------------------------------------
 void oled_system_failed() {
-  clockDisable();
+  
   oled.begin(SH1106_SWITCHCAPVCC, 0x3C); /* initialize OLED with I2C address 0x3C */
   oled.clearDisplay(); // Clear the buffer.
   oled.setTextColor(BLACK, WHITE); // 'inverted' text
@@ -118,7 +120,7 @@ void oled_system_failed() {
 //------------------------------- SD FAILED FUNCTION ------------------------------
 //------------------------------------------------------------------------------------------
 void oled_SD_failed() {
-  clockDisable();
+  
   oled.clearDisplay(); // Clear the buffer.
   oled.setTextSize(2);
   oled.setCursor(13,20); oled.print("SD failed");
@@ -130,7 +132,7 @@ void oled_SD_failed() {
 //------------------------------- WIFI FAILED FUNCTION ------------------------------
 //------------------------------------------------------------------------------------------
 void oled_wifi_failed() {
-  clockDisable();
+  
   oled.clearDisplay(); // Clear the buffer.
   oled.setCursor(27,30); oled.print(MES_WF_FAIL);
   oled_display(); //columm, row --- cot, hang
@@ -138,19 +140,19 @@ void oled_wifi_failed() {
   oled_display(); //columm, row --- cot, hang
 }//end SD_failed
 void oled_get_error() {
-  clockDisable();
+  
   oled.clearDisplay(); // Clear the buffer.
   oled.setCursor(27,30); oled.print(MES_GER);
   oled_display(); //columm, row --- cot, hang
 }//end oled_get_error
 void oled_Export_ok() {
-  clockDisable();
+  
   oled.clearDisplay(); // Clear the buffer.
   oled.setCursor(27,30); oled.print(MES_EOK);
   oled_display(); //columm, row --- cot, hang
 }//end oled_Export_ok
 void oled_Ex_error() {
-  clockDisable();
+  
   oled.clearDisplay(); // Clear the buffer.
   oled.setCursor(27,30); oled.print(MES_EER);
   oled_display(); //columm, row --- cot, hang
@@ -163,7 +165,7 @@ void oled_comeBack() {
 //------------------------------- WIFI FAILED FUNCTION -------------------------------------
 //------------------------------------------------------------------------------------------
 void oled_wifi_SerialUpdater() {
-  clockDisable();
+  
   oled.begin(SH1106_SWITCHCAPVCC, 0x3C); /* initialize OLED with I2C address 0x3C */
   oled.clearDisplay(); // Clear the buffer.
   oled.setTextColor(BLACK, WHITE); // 'inverted' text
@@ -174,7 +176,7 @@ void oled_wifi_SerialUpdater() {
   oled_display(); //columm, row --- cot, hang
 }//end oled_wifi_SerialUpdater
 void oled_wifi_BLEupdater() { //run on core1
-  clockDisable();
+  
   oled.begin(SH1106_SWITCHCAPVCC, 0x3C); /* initialize OLED with I2C address 0x3C */
   oled.clearDisplay(); // Clear the buffer.
   oled.setTextColor(BLACK, WHITE); // 'inverted' text
@@ -185,7 +187,7 @@ void oled_wifi_BLEupdater() { //run on core1
   oled_display(); //columm, row --- cot, hang
 }//end oled_wifi_BLEUpdater
 void oled_BLE_receivedData() { //run on core0
-  clockDisable();
+  
   oled.begin(SH1106_SWITCHCAPVCC, 0x3C); /* initialize OLED with I2C address 0x3C */
   oled.clearDisplay(); // Clear the buffer.
   oled.setTextColor(BLACK, WHITE); // 'inverted' text
@@ -196,7 +198,7 @@ void oled_BLE_receivedData() { //run on core0
   oled_display(); //columm, row --- cot, hang
 }//end oled_BLE_receivedData
 void oled_BLE_eraseData() {//run on core0
-  clockDisable();
+  
   oled.begin(SH1106_SWITCHCAPVCC, 0x3C); /* initialize OLED with I2C address 0x3C */
   oled.clearDisplay(); // Clear the buffer.
   oled.setTextColor(BLACK, WHITE); // 'inverted' text
@@ -207,7 +209,7 @@ void oled_BLE_eraseData() {//run on core0
   oled_display(); //columm, row --- cot, hang
 }//end oled_wifi_BLEUpdater
 void oled_BLE_wifiFailed() {//run on core1
-  clockDisable();
+  
   oled.begin(SH1106_SWITCHCAPVCC, 0x3C); /* initialize OLED with I2C address 0x3C */
   oled.clearDisplay(); // Clear the buffer.
   oled.setTextColor(BLACK, WHITE); // 'inverted' text
@@ -217,20 +219,11 @@ void oled_BLE_wifiFailed() {//run on core1
   oled.setCursor(38,50); oled.print(MES_TRY);
   oled_display(); //columm, row --- cot, hang
 }//end oled_BLE_wifiFailed
-void oled_Clock_Updater() { //always runs on core1
-  if (clockIsActivated()) {
-    clockDeactivate();
-    String ClockTime = RTC_getClock();
-    //S_PRINTLN(ClockTime);
-    if (ClockTime != "") {
-      oled.setCursor(96,0); oled.print(ClockTime);
-      oled_display(); //columm, row --- cot, hang
-    }//end if
-  }//end if
-  
+void oled_showSession() { //always runs on core1
+  oled.setCursor(80,0); oled.print(RTC_getSession());
 }//end oled_Clock_Updater
 void oled_RTC_SerialUpdater() {
-  clockDisable();
+  
   oled.begin(SH1106_SWITCHCAPVCC, 0x3C); /* initialize OLED with I2C address 0x3C */
   oled.clearDisplay(); // Clear the buffer.
   oled.setTextColor(BLACK, WHITE); // 'inverted' text
@@ -241,7 +234,7 @@ void oled_RTC_SerialUpdater() {
   oled_display(); //columm, row --- cot, hang
 }//end oled_RTC_SerialUpdater
 void oled_RTC_SNTPupdater1() {
-  clockDisable();
+  
   oled.begin(SH1106_SWITCHCAPVCC, 0x3C); /* initialize OLED with I2C address 0x3C */
   oled.clearDisplay(); // Clear the buffer.
   oled.setTextColor(BLACK, WHITE); // 'inverted' text
@@ -275,7 +268,7 @@ void oled_RTC_SNTPupdater3(bool SNTPok) {
 // FUNCTION DEFINITIONS - FOR CORE1
 //--------------------------------------------------------------
 void oled_init_c1() {
-  clockDisable();
+  
   oled.begin(SH1106_SWITCHCAPVCC, 0x3C); /* initialize OLED with I2C address 0x3C */
   oled.clearDisplay();
   oled.setTextSize(1);
@@ -327,7 +320,7 @@ void oled_POINTER4() {
 //------------------------------------------------------------------------------------------
 void oled_mainMenu_init() {
   oled.clearDisplay(); // Clear the buffer.
-  oled_Clock_Updater(); //display time at the beginning!
+  oled_showSession();
   oled.setTextColor(BLACK, WHITE); // 'inverted' text
   oled.setCursor(0,0); oled.println(" Main Menu:");
   oled.setTextColor(WHITE, BLACK); // normal text
@@ -357,7 +350,7 @@ void oled_mainMenu_3() {
   oled_display(); //columm, row --- cot, hang
 }//end oled_mainMenu_3
 void oled_done() {
-  clockDisable();
+  
   //oled.begin(SH1106_SWITCHCAPVCC, 0x3C); /* initialize OLED with I2C address 0x3C */
   oled.clearDisplay(); // Clear the buffer.
   oled.setTextSize(2);
@@ -369,7 +362,6 @@ void oled_done() {
 //------------------------------------------------------------------------------------------
 void oled_Frame1_init(String ACopt) {
   oled.clearDisplay(); // Clear the buffer.
-  oled_Clock_Updater(); //display time at the beginning!
   oled.setTextColor(BLACK, WHITE); // 'inverted' text
   oled.setCursor(0,0); oled.println(ACopt);
   oled.setTextColor(WHITE, BLACK); // normal text
@@ -382,9 +374,8 @@ void oled_Frame1_menu() {//use for both "check attendance" and "add class" mode
   oled_display(); //columm, row --- cot, hang
 }//end oled_Frame1heck_1
 void oled_Frame1_mode(String Frame1mode) {
-  clockEnable();
+
   oled.clearDisplay(); // Clear the buffer.
-  oled_Clock_Updater(); //display time at the beginning!
   oled.setTextColor(BLACK, WHITE); // 'inverted' text
   oled.setCursor(0,0); oled.println(Frame1mode);
   oled.setTextColor(WHITE, BLACK); // normal text
@@ -406,9 +397,9 @@ void oled_Frame1_Class2(String* CC1) {
 //ATTENDANCE CHECK
 void oled_Acheck_make() { //no oled.display!!!
   oled.clearDisplay(); // Clear the buffer.
-  oled_Clock_Updater(); //display time at the beginning!
+  oled_showSession();
   oled.setTextColor(BLACK, WHITE); // 'inverted' text
-  oled.setCursor(0,0); oled.println("Scanning Mode");
+  oled.setCursor(0,0); oled.println("Scan mode");
   oled.setTextColor(WHITE, BLACK); // normal text
   oled.setTextSize(2);
   oled.setCursor(5,20); oled.print(MES_WAIT);
@@ -435,7 +426,6 @@ void oled_Acheck_coincide() {
 }//end oled_Acheck_coincide
 void oled_Acheck_makeDone(String StuName,String StuID) {
   oled.clearDisplay(); // Clear the buffer.
-  oled_Clock_Updater(); //display time at the beginning!
   oled.setTextColor(BLACK, WHITE); // 'inverted' text
   oled.setCursor(0,16); oled.println(" ID catched:");
   oled.setTextColor(WHITE, BLACK); // normal text
@@ -461,7 +451,7 @@ void oled_ACheck_done() {
 //------------------------------- MODE 2: GET RFID INFO ------------------------------------
 //------------------------------------------------------------------------------------------
 void oled_connect() {
-  clockDisable();
+  
   oled.clearDisplay(); // Clear the buffer.
   oled.setCursor(27,30); oled.print(MES_CONNECT);
   oled_display(); //columm, row --- cot, hang

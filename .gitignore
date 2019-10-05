@@ -70,3 +70,5 @@ tools/mkspiffs/mkspiffs.exe
 */ipch
 *.DB-shm
 *.DB-wal
+
+/workspace/build

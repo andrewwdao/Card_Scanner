@@ -56,7 +56,7 @@ static bool l3starter=true;
 //### RTC UPDATER         --> C1_RTC_DS3231.cpp
 void Scenarios_update() { //MAIN SCENARIOS
     while (1) {
-        oled_Clock_Updater(); //display time 
+        //oled_Clock_Updater(); //display time 
         if (l1starter) {
             l1starter=false;
             l2starter=true;
@@ -455,7 +455,7 @@ static void Export_make() { //embedded oled compared to Export_begin
         }
     }//end switch
     while (!SW_midPressed());
-    oled_clear();oled_Clock_Updater();
+    oled_clear();//oled_Clock_Updater();
     oled_POINTER4();oled_mainMenu_1();
     return;
 }//end Export_make
@@ -492,7 +492,7 @@ static void ClearAll_sentData() {
     oled_done();
     SD_ClearSent();//main function of this function
     delay(800);
-    oled_clear();oled_Clock_Updater();
+    oled_clear();//oled_Clock_Updater();
     oled_POINTER2();oled_mainMenu_3();
 }//ClearAll_sentData
 //--------------------------------------------------------------

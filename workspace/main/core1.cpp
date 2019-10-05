@@ -81,7 +81,7 @@ static void Core1CombinedTask( void * parameter ) {//task run on core0
       if (RTC_init()) {
         S_PRINT(F("Current time: ")); S_PRINTLN(RTC_getTime());
         S_PRINTLN(RTC_getSecond());
-        Clock_init(RTC_getSecond());//initialize timer appropriately for display time
+        //Clock_init(RTC_getSecond());//initialize timer appropriately for display time
       }
       //////////////////////////only in NORMAL mode/////////////////////////////////
       // ------------ AUTO EXPORT DATA ---------------------------
@@ -117,7 +117,7 @@ static void Core1CombinedTask( void * parameter ) {//task run on core0
       // -------------- RTC INITIALIZE ------------------------
       if (RTC_init()) {
         D_PRINT(F("Current time: ")); D_PRINTLN(RTC_getTime());
-        Clock_init(RTC_getSecond());//initialize timer appropriately for display time
+        //Clock_init(RTC_getSecond());//initialize timer appropriately for display time
       }
       //-------------------------------------------------------
       // #ifdef SERIAL_OUTPUT //give change to core0 to initialize wifi
@@ -142,7 +142,7 @@ static void Core1CombinedTask( void * parameter ) {//task run on core0
       // -------------- RTC INITIALIZE ------------------------
       if (RTC_init()) {
         D_PRINT(F("Current time: ")); D_PRINTLN(RTC_getTime());
-        Clock_init(RTC_getSecond());//initialize timer appropriately for display time
+        //Clock_init(RTC_getSecond());//initialize timer appropriately for display time
       }
       //-------------------------------------------------------
       #ifdef SERIAL_OUTPUT //give change to core0 to initialize wifi

@@ -29,7 +29,7 @@
 #include "C1_Buzzer.h"
 #include "C1_Switch.h"
 #include "C1_Scenarios.h"
-#include "C1_Clock.h"
+//#include "C1_Clock.h"
 // ------ Public constants ------------------------------------
 
 // ------ Public function prototypes -------------------------

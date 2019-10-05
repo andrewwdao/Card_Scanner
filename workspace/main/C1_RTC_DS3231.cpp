@@ -137,14 +137,15 @@ String RTC_getDay() {
   return CurrentDay;
 }//end RTC_getTime
 
-String RTC_getClock() {
+String RTC_getSession() {
   DateTime now = rtc.now();
   uint8_t tempHour = now.hour();
-  uint8_t tempMin  = now.minute();
-  if ((tempHour>24)||(tempMin>60)) {return "";}
-  String C_hour   = (tempHour>9)?((String)tempHour):('0'+(String)tempHour);
-  String C_minute = (tempMin>9)?((String)tempMin):('0'+(String)tempMin);
-  return (RTC_getDay() + '-' + C_hour + ':' + C_minute);
+  String Rmonth = (now.month()<10)?('0'+(String)now.month()):((String)now.month());
+  String Rday   = (now.day()<10)?('0'+(String)now.day()):((String)now.day());
+  String Session = (tempHour>12)?("PM"):("AM");
+  String output =  Session + '-' + Rday + '/' + Rmonth;
+  // S_PRINTLN(output);
+  return output;
 }//end RTC_getClock
 
 uint8_t RTC_getSecond() {

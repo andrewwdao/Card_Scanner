@@ -32,7 +32,7 @@
 bool RTC_init();
 String RTC_getTime();
 String RTC_getDay();
-String RTC_getClock();
+String RTC_getSession();
 uint8_t RTC_getSecond();
 void RTC_Serial_updater();
 void RTC_SNTP_updater();

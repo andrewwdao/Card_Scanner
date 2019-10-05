@@ -46,7 +46,6 @@ void oled_wifi_BLEupdater();
 void oled_BLE_receivedData();
 void oled_BLE_eraseData();
 
-void oled_Clock_Updater();
 void oled_RTC_SerialUpdater();
 void oled_RTC_SNTPupdater1();
 void oled_RTC_SNTPupdater2();
