@@ -319,7 +319,7 @@ void AddClass_init() {
 static void AClass_make(String* AClass, char* NumClass, char Anum) {//String array hold the classes, number of classes, the chosen class number
     
     
-    ///////////////////////////////////TESTING////////////////////////////////////
+    /////////////////////////////////// PROTECT CURRENT DATA ////////////////////////////////////
     if (SD_checkClass(*(AClass+Anum))) {//if this class existed in the database
         oled_clear();
         oled_POINTER4();oled_AClass_override();
@@ -337,7 +337,8 @@ static void AClass_make(String* AClass, char* NumClass, char Anum) {//String arr
             if (SW_midPressed()) { //if confirmed
                 switch (SW_read()) {
                     case YES:  {
-                        //Frame1_ClasDel(ACLASS_LOCATION,AClass, NumClass, Anum);
+                        //also delete the class in the database
+                        SD_deleteClass(AClass, NumClass, Anum, ACHECK_LOCATION);//delete 2 files in 1 func
                         oled_connect(); //show oled screen
                         if (!wifi_isConnected()) {wifi_STA_init();}
                         //send request about the class to server
