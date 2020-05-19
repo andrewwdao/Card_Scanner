@@ -19,10 +19,10 @@
 // ------ Private constants -----------------------------------
 
 // ------ Private function prototypes -------------------------
-static void Frame1_init(String, String, void (*)(String*,char*,char), void (*)(String*,char*,char), void (*)(String));
+static void Frame1_init(String, String, void (*)(String*,char*,char), void (*)(String*,char*,char), void (*)(String,String*,char*));
 static void Frame1_getClass(String*, char*, String);
 //static void Frame1_ClasDel(String, String*, char*, char);
-static void Frame1_ClasDelAll(String, String);
+static void Frame1_ClasDelAll(String, String,String*,char*);
 static void Frame2_init(String, void (*)(String*,char*,String), void (*)(String*,char*,char));
 static void Frame_mainAct(String, String*, char*, void (*)(String*,char*,char));
 
@@ -30,14 +30,14 @@ static void Frame_mainAct(String, String*, char*, void (*)(String*,char*,char));
 
 static void ACheck_make(String*, char*, char);
 static void ACheck_delete(String*, char*, char);
-static void ACheck_delAll(String);
+static void ACheck_delAll(String,String*,char*);
 
 static void AClass_make(String*, char*, char);
 static void AClass_getClass(String*, char*, String);//connect to wifi and get class from server
 
 static void AManual_make(String*, char*, char);
 static void AManual_delete(String*, char*, char);
-static void AManual_delAll(String);
+static void AManual_delAll(String,String*,char*);
 
 static void Export_make();
 
@@ -138,7 +138,7 @@ static void Frame1_init(String mainMode,
                         String ALocation, 
                         void (*chooseFunc)(String*,char*,char), 
                         void (*deleteFunc)(String*,char*,char), 
-                        void (*delAllFunc)(String)) 
+                        void (*delAllFunc)(String,String*,char*)) 
 {
     String Class[MAX_CLASSES];
     for (char ahas=0;ahas<MAX_CLASSES;ahas++){
@@ -185,7 +185,7 @@ static void Frame1_init(String mainMode,
                     break;
                 }
                 case DELETE_ALL: {//delete all class
-                    (*delAllFunc)(mainMode);
+                    (*delAllFunc)(mainMode,Class,numClass);
                     for (char adel=0;adel<MAX_CLASSES;adel++){
                         *(Class+adel)=VOID;
                     }//end for
@@ -210,9 +210,9 @@ void Frame1_ClasDel(String Dlocation,
     }//end for
     SD_getClass(DClass,NumClass,Dlocation); //string array hold classes, number of class, mode location
 }//end FrameFrame1_ClasDel
-static void Frame1_ClasDelAll(String Dlocation, String ACopt) {
+static void Frame1_ClasDelAll(String Dlocation, String ACopt,String* CLass,char* NumClass) {
     oled_done();//only for confirm button only!
-    SD_deleteAllClass(Dlocation);
+    SD_deleteAllClass(Dlocation,CLass,NumClass);
     delay(800);
     oled_Frame1_init(ACopt);
     oled_POINTER4();oled_Frame1_menu();
@@ -302,8 +302,8 @@ static void ACheck_make(String* AClass, char* NumClass, char Anum) {//string arr
 static void ACheck_delete(String* DClass, char* NumClass, char Dnum) {//string array hold classes, number of classes, class number being chosen
     Frame1_ClasDel(ACHECK_LOCATION,DClass, NumClass, Dnum);
 }//end ACheck_delete
-static void ACheck_delAll(String ACopt) {
-    Frame1_ClasDelAll(ACHECK_LOCATION,ACopt);
+static void ACheck_delAll(String ACopt,String* CLass,char* NumClass) {
+    Frame1_ClasDelAll(ACHECK_LOCATION,ACopt,CLass,NumClass);
 }//end DeleteAllClass
 //------------------------------- FUNCTIONS USE FOR BOTH ADD CLASS BY USING SERVER AND ADD CLASS MANUALLY------------------------
 //-------------------------------------------------------------------------------------------------------------------------------
@@ -434,8 +434,8 @@ static void AManual_make(String* Aclass, char* numClass, char classNum) { //Stri
 static void AManual_delete(String* DClass, char* NumClass, char Dnum) {
     Frame1_ClasDel(ACLASS_LOCATION,DClass, NumClass, Dnum);
 }//end AClass_delete
-static void AManual_delAll(String ACopt) {
-    Frame1_ClasDelAll(ACLASS_LOCATION,ACopt);
+static void AManual_delAll(String ACopt,String* CLass,char* NumClass) {
+    Frame1_ClasDelAll(ACLASS_LOCATION,ACopt,CLass,NumClass);
 }//end AClass_delAll
 //------------------------------- MODE 4 + MODE 9: EXPORT DATA -------------------------------
 //------------------------------------------------------------------------------------------

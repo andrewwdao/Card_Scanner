@@ -261,33 +261,29 @@ void SD_deleteClass(String* SClass, char* NumClass, char ClassNum, String Ddir) 
     SD_deleteFile(Ddir+"classes.txt"); //Delete file classes.txt
     SD_deleteFile(Ddir+*(SClass+ClassNum)+".txt"); //Delete file classes.txt
 
-    File SD_classFile = SD.open(Ddir+"classes.txt", FILE_APPEND);//create a blank file
-    if((!SD_classFile)&&(SD_classFile.isDirectory())) {
-        D_PRINTLN(F("File not found!"));
-        return;
-    }//end if
-    for (char adel=0;adel<(*NumClass);adel++) {
-        if (adel!=ClassNum) {
-            SD_classFile.print(*(SClass+adel));
-            SD_classFile.print("\r\n");
-        }//end if
-    }//end for
-    SD_classFile.close();
+    // File SD_classFile = SD.open(Ddir+"classes.txt", FILE_APPEND);//create a blank file
+    // if((!SD_classFile)&&(SD_classFile.isDirectory())) {
+    //     D_PRINTLN(F("File not found!"));
+    //     return;
+    // }//end if
+    // for (char adel=0;adel<(*NumClass);adel++) {
+    //     if (adel!=ClassNum) {
+    //         SD_classFile.print(*(SClass+adel));
+    //         SD_classFile.print("\r\n");
+    //     }//end if
+    // }//end for
+    // SD_classFile.close();
     return;   
 }//end SD_ACheck_deleteClass
-void SD_deleteAllClass(String Ddir) {
-    String Class[MAX_CLASSES];
-    for (char adel=0;adel<MAX_CLASSES;adel++){
-        *(Class+adel)=VOID;
-    }//end for
-    char* numClass=(char*)malloc(1);
-    SD_getClass(Class, numClass, Ddir);//string array hold classes, number of class, mode location
+void SD_deleteAllClass(String Ddir,String* CLass,char* NumClass) {
     SD_deleteFile(Ddir+"classes.txt"); //Delete file classes.txt
-    SD.open(Ddir+"classes.txt", FILE_APPEND);//create a blank file
-    for (char adel=0;adel<(*numClass);adel++) { //delete all database files
-        SD_deleteFile(Ddir+*(Class+adel)+".txt");
+    File temp = SD.open(Ddir+"classes.txt", FILE_APPEND);//create a blank file
+    temp.close();
+    for (char adel=0;adel<(*NumClass);adel++) { //delete all database files
+        if (*(CLass+adel) != VOID) {
+            SD_deleteFile(Ddir+*(CLass+adel)+".txt");
+        }// end if
     }//end for
-    free(numClass);
     return;
 }//end DeleteAllClass
 
@@ -481,8 +477,8 @@ void SD_updateDatabase(String* DClass,
                     (SD_dtbFile.print('|'))          &&
                     (SD_dtbFile.print(buf.name))&&
                     (SD_dtbFile.print("\r\n"))) //to make it compatible with windows
-                    {S_PRINTLN(F("Saved!"));oled_getRFID_status("Saved!");} 
-                else{S_PRINTLN(F("Failed!"));oled_getRFID_status("Failed!");}
+                    {S_PRINTLN(F("Saved!"));oled_getRFID_status("Saved!          ");} 
+                else{S_PRINTLN(F("Failed!"));oled_getRFID_status("Failed!         ");}
                 //total 11(67003FCA88|) + 9(B1509360|) + 15(name) +2(\r\n) = 37;
                 SD_dtbFile.close();
                 doneBuf[CurPointer]=true;
@@ -513,7 +509,7 @@ void SD_updateDatabase(String* DClass,
              /////////////////////// IF CANCEL THE PROCESS DURING ADD CLASS TIME
               //////////////saving and displaying students that successfully added into the class
                 cBuffer = (String)mesBuf+" students left";
-                SD_saveClass(ACLASS_LOCATION,buf.Class,cBuffer); //save the class name to the system
+                SD_saveClass(ACLASS_LOCATION,buf.Class,cBuffer); //save the class name to the manual add class system
               /////////////////////save the remain students that didn't check in yet - use buffer file to sit between trasferation
                 File rootFile = SD.open(ACLASS_LOCATION+buf.Class+".txt", FILE_READ);
                 if((!rootFile)&&(rootFile.isDirectory())) {
@@ -538,6 +534,7 @@ void SD_updateDatabase(String* DClass,
                 rootFile.close();desFile.close();
                 SD_deleteFile(ACLASS_LOCATION+buf.Class+".txt");
                 SD_renameFile(ACLASS_LOCATION+"buffer.txt", ACLASS_LOCATION+buf.Class+".txt");
+                SD_saveClass(ACHECK_LOCATION,buf.Class,cBuffer); //save class to check-in even when not all studentt have been added
              //////////////////////////////////////////////////////////////////
                 return;
             }//end if
@@ -582,7 +579,7 @@ void SD_updateDatabase(String* DClass,
 
 // check if this class existed in the database or not
 bool SD_checkClass(String CLass) {
-    File SD_cFile = SD.open(ACLASS_LOCATION+"classes.txt", FILE_READ);
+    File SD_cFile = SD.open(ACHECK_LOCATION+"classes.txt", FILE_READ);
     if((!SD_cFile)&&(SD_cFile.isDirectory())) {
         D_PRINTLN(F("File not found!"));
         return false;
@@ -663,7 +660,8 @@ bool SD_moveDATA() {
 //------------------------------------------------------------------------------------------
 void SD_ClearSent() {
     SD_deleteFile(SENT_LOCATION+"DATA.TXT"); //Delete file data.txt
-    SD.open(SENT_LOCATION+"DATA.TXT", FILE_APPEND);//create a blank file
+    File temp = SD.open(SENT_LOCATION+"DATA.TXT", FILE_APPEND);//create a blank file
+    temp.close();
 }//ClearAll_sentData
 //------------------------------------------------------------------------------------------
 void SD_deleteFile(String path) {

@@ -142,7 +142,7 @@ String RTC_getSession() {
   uint8_t tempHour = now.hour();
   String Rmonth = (now.month()<10)?('0'+(String)now.month()):((String)now.month());
   String Rday   = (now.day()<10)?('0'+(String)now.day()):((String)now.day());
-  String Session = (tempHour>12)?("PM"):("AM");
+  String Session = (tempHour>11)?("PM"):("AM");
   String output =  Session + '-' + Rday + '/' + Rmonth;
   // S_PRINTLN(output);
   return output;

@@ -44,7 +44,7 @@
             "command": "make",
             "type": "shell",
             "args": [
-                "-j8",
+                "-j2",
                 "flash"
             ],
             "presentation": {

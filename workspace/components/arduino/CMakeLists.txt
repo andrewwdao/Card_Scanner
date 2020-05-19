@@ -48,6 +48,7 @@ set(LIBRARY_SRCS
   libraries/FS/src/FS.cpp
   libraries/FS/src/vfs_api.cpp
   libraries/HTTPClient/src/HTTPClient.cpp
+  libraries/HTTPUpdate/src/HTTPUpdate.cpp
   libraries/NetBIOS/src/NetBIOS.cpp
   libraries/Preferences/src/Preferences.cpp
   libraries/SD_MMC/src/SD_MMC.cpp
@@ -183,8 +184,10 @@ set(COMPONENT_ADD_INCLUDEDIRS
   libraries/EEPROM/src
   libraries/ESP32/src
   libraries/ESPmDNS/src
+  libraries/FFat/src
   libraries/FS/src
   libraries/HTTPClient/src
+  libraries/HTTPUpdate/src
   libraries/NetBIOS/src
   libraries/Preferences/src
   libraries/SD_MMC/src

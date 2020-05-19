@@ -67,7 +67,7 @@ void SD_init();
 void SD_getClass(String*,char*,String);//number of class, string array hold classes, mode location
 void SD_ACheck_make(String*,char*,char);
 void SD_deleteClass(String*,char*,char,String);
-void SD_deleteAllClass(String);
+void SD_deleteAllClass(String,String*,char*);
 
 bool SD_checkClass(String);
 
