@@ -71,4 +71,4 @@ tools/mkspiffs/mkspiffs.exe
 *.DB-shm
 *.DB-wal
 
-/workspace/build
+esp32/workspace/build
