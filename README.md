@@ -12,6 +12,8 @@ git clone --recursive https://github.com/minhan74/Card_Scanner.git
 git submodule update --init --recursive
 ```
 
+This project aims to create a portable device that is used to check student attendance based on their student ID card.
+
 This project includes two main components:
 
 * A Card Reader Device
@@ -23,17 +25,23 @@ This device is designed for reading student card, indicates student information 
 
 ### Hardware
 
+#### PCB
+
+Designed in Altium 18.
+
+Manufactured in china.
+
+![pcb-front](pictures/PCB_front.jpg)
+![pcb-back](pictures/PCB_back.jpg)
+
 #### Cover
 
 Designed using Fusion360.
 
 Created by 3D printing and laser cutting.
 
-#### PCB
-
-Designed in Altium 18.
-
-Manufactured in china.
+![cover-open](pictures/cover-open.jpg)
+![cover-close](pictures/cover-close.jpg)
 
 ### Embedded software
 
@@ -76,6 +84,12 @@ Based on:
 * Assoc. Prof. Chi-Ngon Nguyen, Can Tho University. <ncngon@ctu.edu.vn>
 * Dr. Chanh-Nghiem Nguyen, Can Tho University. <ncnghiem@ctu.edu.vn>
 * Msc. Khac-Nguyen Nguyen, Can Tho University. <nknguyen@ctu.edu.vn>
+
+## Credited
+
+* Mr. Quang-Thong Duong-Pham was responsible for PCB design, product testing and reporting.
+* Mr. Quang-Nhut Tran was responsible for web server development.
+* Mr. Minh-An Dao was responsible for embedded software development.
 
  (c) 2019 Quang-Thong Duong-Pham <baronvn7197@gmail.com> - Quang-Nhut Tran <nhut1202@gmail.com> - Minh-An Dao <minhan7497@gmail.com> - Can Tho University.
 
