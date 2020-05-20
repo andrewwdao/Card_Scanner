@@ -31,8 +31,8 @@ Designed in Altium 18.
 
 Manufactured in china.
 
-![pcb-front](pictures/PCB_front.jpg)
-![pcb-back](pictures/PCB_back.jpg)
+![pcb-front](docs/pictures/PCB_front.jpg)
+![pcb-back](docs/pictures/PCB_back.jpg)
 
 #### Cover
 
@@ -40,12 +40,14 @@ Designed using Fusion360.
 
 Created by 3D printing and laser cutting.
 
-![cover-open](pictures/cover-open.jpg)
-![cover-close](pictures/cover-close.jpg)
+![cover-open](docs/pictures/cover-open.jpg)
+![cover-close](docs/pictures/cover-close.jpg)
 
 ### Embedded software
 
 Microcontroller: ESP32 DEV KIT V1
+
+Peripherals: RDM6300 RFID reader, RTC module, SD card reader, 3-state button, voltage converter, lipo battery, lipo charger.
 
 Run on both core of an ESP32 using FreeRTOS. Compiled by ESP-IDF with Arduino core as a component.
 
