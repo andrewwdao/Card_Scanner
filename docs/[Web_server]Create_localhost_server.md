@@ -1,6 +1,7 @@
 # HƯỚNG DẪN TẠO SERVER LOCAL
 
 - Hai ứng dụng nền tảng cơ bản để dựng và chạy localhost trên máy tính cá nhân:
+
 [Xampp](https://www.apachefriends.org/index.html)
 
 [Git](https://git-scm.com/)

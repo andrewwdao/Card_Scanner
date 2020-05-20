@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2020 at 01:34 PM
+-- Generation Time: May 20, 2020 at 03:49 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -36,6 +36,16 @@ CREATE TABLE `admin` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `taikhoan`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(2, 'admin', '$2y$10$Te4KF2jcZHhILHoMu.5O1.RXPSvPhGqZIl7.pk3eRP3dyrkqkpKq.', NULL, NULL, NULL),
+(3, 'nhuttran@natlabs.net', '$2y$10$YcJucif29sEUakcta3Lyq.rMFkGguKewhtTSBt9.gslhdezdeC8zG', NULL, NULL, NULL),
+(4, 'quangthong@natlabs.net', '$2y$10$JluRDtB9sMV4ZzaZc5ONi.dUcHqdBloKZnrrBkQvHaS0p/uP3Jcuy', NULL, NULL, NULL),
+(5, 'minhan@natlabs.net', '$2y$10$XPl42ZJiW2j.AzPDMrqfj.VHHy5KfHWRSFzpTYjuBN9eZ2/Q7v1wC', NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -50,14 +60,6 @@ CREATE TABLE `diemdanhs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `diemdanhs`
---
-
-INSERT INTO `diemdanhs` (`masv`, `mamon`, `buoivang`, `mathe`, `created_at`, `updated_at`) VALUES
-('B1509325', 'CN123-S5', '2019-05-27', NULL, NULL, NULL),
-('B1509326', 'CN123-S5', '2019-05-27', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -78,8 +80,7 @@ CREATE TABLE `lops` (
 --
 
 INSERT INTO `lops` (`id`, `malop`, `tenlop`, `created_at`, `updated_at`) VALUES
-(1, 'CN123-S5', 'CN123-S5', NULL, NULL),
-(2, 'CN123-C5', 'CN123-C5', NULL, NULL);
+(4, 'TN123-S3', 'Vi điều khiển sáng thứ 3', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -127,8 +128,7 @@ CREATE TABLE `monhocs` (
 --
 
 INSERT INTO `monhocs` (`id`, `mamon`, `tenmon`, `sotinchi`, `sotiet`, `created_at`, `updated_at`) VALUES
-(1, 'CN123-S5', 'CN123-S5', 3, 45, NULL, NULL),
-(2, 'CN123-C5', 'CN123-C5', 3, 45, NULL, NULL);
+(4, 'TN123', 'Vi điều khiển', 3, 45, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -163,8 +163,8 @@ CREATE TABLE `sinh_viens` (
 --
 
 INSERT INTO `sinh_viens` (`id`, `masv`, `hoten`, `gioitinh`, `malop`, `created_at`, `updated_at`) VALUES
-(1, 'B1509325', 'Lê Ngọc Oanh', 'Nam', 'CN123-S5', '2019-05-27 00:15:17', '2019-05-27 00:15:17'),
-(2, 'B1509326', 'Nguyễn Tuấn Khanh', 'Nữ', 'CN123-S5', '2019-05-27 00:15:17', '2019-05-27 00:15:17');
+(3, 'B1509360', 'Đào Minh An', 'Nam', 'TN123-S3', '2020-05-20 06:32:19', '2020-05-20 06:32:19'),
+(4, 'B1509397', 'Trần Quang Nhựt', 'Nam', 'TN123-S3', '2020-05-20 06:32:29', '2020-05-20 06:32:29');
 
 -- --------------------------------------------------------
 
@@ -249,13 +249,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `lops`
 --
 ALTER TABLE `lops`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -267,13 +267,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `monhocs`
 --
 ALTER TABLE `monhocs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sinh_viens`
 --
 ALTER TABLE `sinh_viens`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
