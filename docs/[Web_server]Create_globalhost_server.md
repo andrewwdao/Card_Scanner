@@ -16,13 +16,13 @@
   
   ![Global02](pictures/global02.png)
 
-  - Ở giao diện File Manager ta nhấp chuột chọn nút Upload trên thanh công cụ, sau đó nhấp chọn nút Upload File và trỏ đến thư mục chưa tệp tin CheckinSource.zip và bấm Open. Sau đó chờ tệp tin được upload thành công vào hệ thống.
-  - Quay lại giao diện File Manager nhấp chuột phải vào tệp tin CheckinSource.zip chọn Extract và chờ đến khi tệp tin được xả nén thành công. Ta sẽ thấy lúc này sẽ xuất hiện 2 thư mục mới có tên là “card_scanner” và “publish_html”. 
+  - Ở giao diện File Manager ta nhấp chuột chọn nút Upload trên thanh công cụ, sau đó nhấp chọn nút Upload File và trỏ đến thư mục chưa tệp tin CheckinSource.zip (\web_server\global\) và bấm Open. Sau đó chờ tệp tin được upload thành công vào hệ thống.
+  - Quay lại giao diện File Manager nhấp chuột phải vào tệp tin CheckinSource.zip chọn Extract và chờ đến khi tệp tin được xả nén thành công. Ta sẽ thấy lúc này sẽ xuất hiện 2 thư mục mới có tên là “card_scanner” và “publish_html”.
   
   ![Global03](pictures/global03.png)
 
   - Như vậy là đã thành công upload sources code lên hệ thống cPanel của hosting.
-- Quay lại giao diện chính của cPanel chọn MySQL Databases trong mục Database. Trình duyệt sẽ điều hướng đến trang quản lý cơ sở dữ liệu. 
+- Quay lại giao diện chính của cPanel chọn MySQL Databases trong mục Database. Trình duyệt sẽ điều hướng đến trang quản lý cơ sở dữ liệu.
   - Ta tạo 1 cơ sở dữ liệu mới tên “countstd” như hình và nhấp chuột vào nút Create Database.
   
   ![Global04](pictures/global04.png)
@@ -35,7 +35,7 @@
   
   ![Global06](pictures/global06.png)
 
-- Sau khi đã hoàn tất các bước tạo cơ sở dữ liệu, ta quay lại giao diện File Manager nhấp chuột truy cập vào thư mục “card_scanner”. 
+- Sau khi đã hoàn tất các bước tạo cơ sở dữ liệu, ta quay lại giao diện File Manager nhấp chuột truy cập vào thư mục “card_scanner”.
   - Nhấp chọn nút Setting ở góc trên bên trái của giao diện File Manager. Trong hộp thoại “Freferences”, tích chọn Show Hidden File sau đó nhấp chọn Save để lưu và đóng hộp thoại.
   
   ![Global07](pictures/global07.png)
@@ -48,8 +48,8 @@
   
   ![Global09](pictures/global09.png)
 
-- Quay lại giao diện chính của cPanel chọn mục phpMyAdmin. 
-  - Trong giao diện phpMyAdmin chọn tên Database đã tạo ở danh sách DB phía bên trái, sau đó nhấp chọn nút Insert. Trong mục File to import nhấp chọn nút Choose File và trỏ đến file “countstd.sql” trên máy tính và nhấp chọn Open. 
+- Quay lại giao diện chính của cPanel chọn mục phpMyAdmin.
+  - Trong giao diện phpMyAdmin chọn tên Database đã tạo ở danh sách DB phía bên trái, sau đó nhấp chọn nút Insert. Trong mục File to import nhấp chọn nút Choose File và trỏ đến file “countstd.sql” trên máy tính và nhấp chọn Open.
   
   ![Global10](pictures/global10.png)
 
