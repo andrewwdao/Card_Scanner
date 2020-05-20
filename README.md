@@ -5,6 +5,13 @@
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) <!-- [![License](https://img.shields.io/github/license/minhan74/Card_Scanner.svg)](LICENSE) -->
 [![Size](https://img.shields.io/github/repo-size/minhan74/Card_Scanner)](https://github.com/minhan74/Card_Scanner/)
 
+## Download
+
+```bash
+git clone --recursive https://github.com/minhan74/Card_Scanner.git
+git submodule update --init --recursive
+```
+
 This project includes two main components:
 
 * A Card Reader Device
@@ -19,16 +26,19 @@ This device is designed for reading student card, indicates student information 
 #### Cover
 
 Designed using Fusion360.
+
 Created by 3D printing and laser cutting.
 
 #### PCB
 
 Designed in Altium 18.
+
 Manufactured in china.
 
 ### Embedded software
 
 Microcontroller: ESP32 DEV KIT V1
+
 Run on both core of an ESP32 using FreeRTOS. Compiled by ESP-IDF with Arduino core as a component.
 
 * ESP-IDF version: 3.2
@@ -38,7 +48,11 @@ Run on both core of an ESP32 using FreeRTOS. Compiled by ESP-IDF with Arduino co
 ## Web Server
 
 Written in PHP 7.4.6
-Based on Lavarel framework.
+
+Based on:
+
+* Xampp v7.4.6
+* Lavarel framework 5.6.22
 
 ## Documentation
 
@@ -53,7 +67,7 @@ Based on Lavarel framework.
 ## Sponsor by
 
 * Msc. Khac-Nguyen Nguyen, Can Tho University. <nknguyen@ctu.edu.vn>
-* Can Tho University school scientific research fund. ctu.edu.vn
+* Can Tho University school scientific research fund.
 
 ## Supervised by
 
@@ -71,4 +85,3 @@ Based on Lavarel framework.
 [Web server - How to use]: /docs/[Web_server]How_to_use_web_server.md
 [Web server - Create localhost server]: /docs/[Web_server]Create_localhost_server.md
 [Web server - Create globalhost server]:[Web_server]Create_globalhost_server.md
-
