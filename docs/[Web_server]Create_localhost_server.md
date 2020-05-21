@@ -26,7 +26,7 @@
 
   - Chọn OK để save lại.
 
-- **Bước 1:** chép thư mục card_scanner (\web_server\local\) vào thư mục C:\xampp\htdocs.
+- **Bước 1:** Giải nén file card_scanner.zip(\web_server\local\) và chép thư mục card_scanner vào thư mục C:\xampp\htdocs.
 - **Bước 2:** Khởi động phần mềm Xampp để tạo môi trường cho Localhost. Nhấn Start cho Apache và MySQL.
 
 ![local05](pictures/local05.png)

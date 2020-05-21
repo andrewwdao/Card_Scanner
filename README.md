@@ -31,8 +31,7 @@ Designed in Altium 18.
 
 Manufactured in china.
 
-![pcb-front](docs/pictures/PCB_front.jpg)
-![pcb-back](docs/pictures/PCB_back.jpg)
+![pcb](docs/pictures/PCB.jpg)
 
 #### Cover
 
@@ -40,8 +39,7 @@ Designed using Fusion360.
 
 Created by 3D printing and laser cutting.
 
-![cover-open](docs/pictures/cover-open.jpg)
-![cover-close](docs/pictures/cover-close.jpg)
+![cover](docs/pictures/cover.jpg)
 
 ### Embedded software
 
@@ -91,9 +89,10 @@ Based on:
 
 * Mr. Quang-Thong Duong-Pham was responsible for PCB design, product testing and reporting.
 * Mr. Quang-Nhut Tran was responsible for web server development.
+* Mr. Anh-Khoi Tran was responsible for database and web server improving.
 * Mr. Minh-An Dao was responsible for embedded software development.
 
- (c) 2019 Quang-Thong Duong-Pham <baronvn7197@gmail.com> - Quang-Nhut Tran <nhut1202@gmail.com> - Minh-An Dao <minhan7497@gmail.com> - Can Tho University.
+ (c) 2019 Quang-Thong Duong-Pham <baronvn7197@gmail.com> - Quang-Nhut Tran <nhut1202@gmail.com> - Anh-Khoi Tran <khoitrananh.20@gmail.com> - Minh-An Dao <minhan7497@gmail.com> - Can Tho University.
 
 <!-- Links -->
 [Full Report]:/notavailable_yet
