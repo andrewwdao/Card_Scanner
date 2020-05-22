@@ -58,7 +58,7 @@ class CheckinExport implements FromQuery, WithColumnFormatting, WithMapping,  Wi
             $invoice->ten_mon,
             $invoice->hoc_ky,
             $invoice->nam_hoc,
-            $invoice->buoi_co_mat,
+            (string)((int)($invoice->buoi_co_mat-1)),
             $invoice->so_buoi,
         ];
     }

@@ -30,7 +30,6 @@ class MonhocRequest extends FormRequest
             // 'so_tiet'=>'required|numeric|min:30|max:75',
             // 'so_tin_chi'=>'required|numeric|min:2|max:4',
             'hoc_ky' => 'numeric|min:1|max:3',
-            'nam_hoc'=>'numeric|min:2000',
             'so_buoi'=>'required|numeric',
             'buoi' => 'required'
         ];
@@ -55,8 +54,8 @@ class MonhocRequest extends FormRequest
         'hoc_ky.numeric'=>"Học kỳ phải là 1, 2 hoặc 3",
         'hoc_ky.min'=>"Học kỳ phải là 1, 2 hoặc 3",
         'hoc_ky.max'=>"Học kỳ phải là 1, 2 hoặc 3",
-        'nam_hoc.numeric'=>"Năm học phải lớn hơn 2000",
-        'nam_hoc.min'=>"Năm học phải lớn hơn 2020",
+        // 'nam_hoc.numeric'=>"Năm học phải lớn hơn 2000",
+        // 'nam_hoc.min'=>"Năm học phải lớn hơn 2020",
         ];
     }
 }

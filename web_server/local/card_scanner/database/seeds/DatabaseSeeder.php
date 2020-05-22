@@ -19,10 +19,11 @@ class seedAdmin extends Seeder
     public function run()
     {
         DB::table('admin')->insert([
-            ['taikhoan' => 'admin', 'matkhau' => bcrypt('123456')],
+            ['taikhoan' => 'admin', 'password' => bcrypt('123456')],
             // ['taikhoan' => 'nhuttran@natlabs.net', 'password' => bcrypt('Natlabs_397')],
             // ['taikhoan' => 'quangthong@natlabs.net', 'password' => bcrypt('Natlabs_482')],
-            // ['taikhoan' => 'minhan@natlabs.net', 'password' => bcrypt('Natlabs_360')],
+            // ['taikhoan' => 'anhkhoi@natlabs.net', 'password' => bcrypt('123456')],
+            // ['taikhoan' => 'minhan@natlabs.net', 'password' => bcrypt('123456')],
         ]);
     }
 }

@@ -148,16 +148,17 @@ class APIcontroller extends Controller
 
         if($request->has('class'))
         {
-            $data = SinhVien::where('malop', $request->class)->get(['masv','hoten','malop']);
+            $data = SinhVien::where('id_mon', monhoc::where('ma_mon',$request->class)->get()[0]['id'])
+                    ->get(['mssv','ho', 'ten']);
         }
         else{
-            $data = SinhVien::get(['masv','hoten','malop']);
+            $data = SinhVien::get(['mssv','ho', 'ten']);
         }
         
         $temp = [];
         foreach ($data as $key => $value) {
-            //$temp[] = array("mssv" => $value['masv'], "name" => vn_to_str($value['hoten']), "class" => $value['malop']);
-            $temp[] = array("m" => $value['masv'], "n" => vn_to_str($value['hoten']));
+            //$temp[] = array("mssv" => $value['mssv'], "name" => vn_to_str($value['hoten']), "class" => $value['malop']);
+            $temp[] = array("m" => $value['mssv'], "n" => vn_to_str($value['ho'] . ' ' . $value['ten']));
         }
 
         return response()->json( $temp, 200);
@@ -166,15 +167,15 @@ class APIcontroller extends Controller
     //request class
     public function RequestClass(Request $request){
         if($request->has('new')){
-            $data = Lop::get(['malop']);
+            $data = monhoc::get(['ma_mon']);
         }
         else{
-            $data = Lop::get(['malop']);
+            $data = monhoc::get(['ma_mon']);
         }
 
         $temp = [];
         foreach($data as $key => $value){
-            $temp[] = array("Class" => $value['malop']);
+            $temp[] = array("Class" => $value['ma_mon']);
         }
 
         return response()->json($temp, 200);

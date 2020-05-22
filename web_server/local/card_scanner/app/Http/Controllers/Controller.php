@@ -183,6 +183,8 @@ class Controller extends BaseController
     {
         if ($request->ajax()) {
             if (monhoc::find($request->id)->delete()) {
+                SinhVien::where('id_mon', $request->id)->delete();
+                diemdanh::where('id_mon', $request->id)->delete();
                 return 'ok';
             } else {
                 return 'error';
@@ -244,9 +246,10 @@ class Controller extends BaseController
         }
 
         if($request->get('id_mon')!=''){
-            $data=SinhVien::join('diemdanh','sinhvien.id','=','diemdanh.id_sinhvien')
-            ->join('monhoc', 'monhoc.id', '=', 'diemdanh.id_mon')
+            $data=SinhVien::join('diemdanh','sinhvien.id','=','id_sinhvien', 'left outer')
+            ->join('monhoc', 'monhoc.id', '=', 'diemdanh.id_mon', 'left outer')
             ->where('monhoc.id', '=', $request->get('id_mon'))
+            ->orderBy('mssv')
             ->select('mssv', 'ho', 'ten', 'so_buoi', 'ma_mon', DB::raw('count(*) as buoi_co_mat'))
             ->groupBy('mssv', 'ho', 'ten', 'so_buoi', 'ma_mon')->get();
             // ->join('monhoc', 'monhoc.id', '=', 'diemdanh.id_mon')
@@ -288,15 +291,24 @@ class Controller extends BaseController
             {
                 // SinhVien::create($request->all());
                 // return redirect()->back();
+                $id_mon = monhoc::find($request->id_mon)->id;
                 SinhVien::insert([
                     'mssv' => $request->mssv,
                     'ho' => $request->ho,
                     'ten' => $request->ten,
                     'gioi_tinh' => $request->gioi_tinh,
-                    'id_mon' => monhoc::find($request->id_mon)->id,
+                    'id_mon' => $id_mon,
                 ]);
 
                 $sinhvien = SinhVien::all();
+                
+                // echo '<script> console.log(' . SinhVien::where('mssv', $request->mssv)->where('id_mon', $id_mon)->get()[0]['id'] . ')</script>';
+                diemdanh::insert([
+                    'id_sinhvien' => SinhVien::where('mssv', $request->mssv)
+                                     ->where('id_mon', $id_mon)
+                                     ->get()[0]['id'],
+                    'id_mon' => $id_mon
+                ]);
         
                 return redirect()->route('quan-ly-sinh-vien')->with(['message' => 'Thêm thành công!']);
             }

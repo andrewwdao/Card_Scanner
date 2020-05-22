@@ -112,7 +112,7 @@
 										<td>{{ $val->mssv }}</td>
 										<td>{{ $val->ho . ' ' . $val->ten }}</td>
 										<td>{{ $val->ma_mon }}</td>
-										<td class="text-center">{{ $val->buoi_co_mat . '/' . $val->so_buoi }}</td>
+										<td class="text-center">{{ (string)((int)$val->buoi_co_mat - 1) . '/' . $val->so_buoi }}</td>
 										<!-- <td class="text-right">
 											<a href="{{ url('quan-ly/chi-tiet-buoi-vang/'.$val->id_sinhvien.'/'.$val->mamon) }}" class="btn btn-success"><i class="fe fe-eye"></i> Xem chi tiết</a>
 										</td> -->

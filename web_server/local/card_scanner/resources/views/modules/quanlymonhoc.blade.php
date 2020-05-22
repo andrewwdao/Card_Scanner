@@ -37,7 +37,7 @@
 								<div class="col-lg-6">
 									<div class="form-group">
 										<label>Năm học</label>
-										<input maxlength=4 type="text" class="form-control" placeholder="Năm học..." name="nam_hoc" value="{{old('nam_hoc')}}">
+										<input maxlength=9 type="text" class="form-control" placeholder="Năm học..." name="nam_hoc" value="{{old('nam_hoc')}}">
 										<p class="text-danger">{{$errors->first('nam_hoc')}}</p>
 									</div>
 								</div>

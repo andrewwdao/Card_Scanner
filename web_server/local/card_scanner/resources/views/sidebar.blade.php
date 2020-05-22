@@ -21,7 +21,7 @@
             <ul id="quanly" class="collapse list-unstyled">
                 <li @if(Request::segment(2)=='quan-ly-mon-hoc') class="active" @endif><a href="{{route('gquan-ly-mon-hoc')}}">Danh sách môn học</a></li>
                 <li @if (Request::segment(2)=='quan-ly-sinh-vien') class="active" @endif><a href="{{route('quan-ly-sinh-vien')}}">Danh sách sinh viên</a></li>
-                <li @if (Request::segment(2)=='quan-ly-lop') class="active" @endif><a href="{{route('gquan-ly-lop')}}">Danh sách lớp</a></li>
+                <!-- <li @if (Request::segment(2)=='quan-ly-lop') class="active" @endif><a href="{{route('gquan-ly-lop')}}">Danh sách lớp</a></li> -->
             </ul>
         </li>
          <li >
