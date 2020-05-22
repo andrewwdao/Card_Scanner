@@ -74,82 +74,12 @@ class Controller extends BaseController
         }
     }
 
-    public function Train_data_image(Request $request,$id)
-    {
-         
-        $fail = [];
-        $done = [];
-        $result =  [];
-       
-        $dmm = new My_Face();
-        $up = $request->file('upload');
-        if(!empty($up))
-        {
-            if (count($up) > 0) {
-                foreach ($up as $data) {
-    
-
-                    $temp = $dmm->enroll($data,$id);
-                  
-                    if(isset($temp->face_id)){
-                        $done[] = $data->getClientOriginalName();
-                    }
-                    else
-                    {
-                        $fail[] = $data->getClientOriginalName();
-                    }
-                    $result[] = $temp;
-                }
-                
-               
-            }
-        }
-        
-
-        
-       
-        return redirect()->back()->with(['result' => array('done'=>$done,'fail'=>$fail)]);
-    }
 
     public function logout()
     {
         Auth::guard('admin')->logout();
 
         return redirect()->route('gdang-nhap');
-    }
-
-    public function quanLyKhuonMat(){
-         $a = new My_Face();
-            $ds = isset($a->view()->subject_ids) ? $a->view()->subject_ids : [];
-
-        
-        $data = SinhVien::whereIn('masv',$ds)->get();
-        return view('modules.quanlykhuonmat',compact('data'));
-    }
-    public function DeleteKhuonMat($id){
-         $a = new My_Face();
-            $ds = $a->delete_subject($id);
-           if($ds->status == 'Complete')
-           {
-            return redirect()->back()->with(['mes' => "Đã xóa thành công khuôn mặt có id là {$id} ra khỏi hệ thống !"]);
-           }
-    }
-    public function trainingList()
-    {
-       
-        $dslop = lop::all();
-
-        return view('modules.training-list', compact('dslop'));
-    }
-
-    public function training($mssv)
-    {
-        
-        if (!empty($mssv)) {
-            $sinhvien = SinhVien::where('masv', $mssv)->get()[0];
-        }
-
-        return view('modules.training', compact('sinhvien','mssv'));
     }
 
 
@@ -159,18 +89,19 @@ class Controller extends BaseController
         
         if($request->has('fileanh'))
         {
-            $today = Carbon::today()->toDateString();
-            $dmm = new My_Face();
+            // $today = Carbon::today()->toDateString();
+            // $dmm = new My_Face();
 
-            $data = $dmm->recognize($request->file('fileanh'));
-            if(isset($data->Errors))
-            {
-                return response()->json(['Error' => 'Không có bất kì ảnh nào trong hệ thống ']);
-            }
+            // $data = $dmm->recognize($request->file('fileanh'));
+            // if(isset($data->Errors))
+            // {
+            //     return response()->json(['Error' => 'Không có bất kì ảnh nào trong hệ thống ']);
+            // }
+
             if(isset($data) && $request->get('monhoc') != '')
             {
-                 foreach($data as $val)
-                 {
+                foreach($data as $val)
+                {
                     foreach($val as $lol)
                     {
                         // dd($lol->transaction->status);
@@ -178,21 +109,24 @@ class Controller extends BaseController
                        {
                            try 
                             {
-                                 diemdanh::create(['masv' => $lol->transaction->subject_id,'mamon'=>$request->get('monhoc'),'buoivang'=>$today]);
+                                diemdanh::create([
+                                    'mssv' => $lol->transaction->subject_id,
+                                    'ma_mon'=> monhoc::where('ma_mon',substr($row[5],0,5))->where('buoi',substr($row[5],6,2))->first(),
+                                    'buoivang'=>$today
+                                ]);
                             }
                             catch(\Illuminate\Database\QueryException $e){
-    
+                                echo $e;
                             }
                            
 
                        }
                     }
-                 }
-                  return response()->json($data);
+                }
+
+                return response()->json($data);
 
             }
-           
-            
         }
       }
     }
@@ -207,18 +141,29 @@ class Controller extends BaseController
     public function PostquanLyMonHoc(MonhocRequest $request)
     {
         monhoc::insert([
-            'mamon' => $request->mamon,
-            'tenmon' => $request->tenmon,
-            'sotinchi' => $request->sotinchi,
-            'sotiet' => $request->sotiet,
+            'ma_mon' => $request->ma_mon . '-' . $request->buoi,
+            'ten_mon' => $request->ten_mon,
+            // 'so_tin_chi' => $request->so_tin_chi,
+            // 'so_tiet' => $request->so_tiet,
+            'hoc_ky' => $request->hoc_ky,
+            'nam_hoc' => $request->nam_hoc,
+            'so_buoi' => $request->so_buoi,
         ]);
 
         return redirect()->route('gquan-ly-mon-hoc')->with(['message' => 'Thêm thành công!']);
     }
 
-    public function Postupdatemonhoc(Request $request, $id)
+    public function Postupdatemonhoc(MonhocRequest $request, $id)
     {
-        monhoc::find($id)->update(['tenmon' => $request->tenmon, 'sotinchi' => $request->sotinchi, 'sotiet' => $request->sotiet]);
+        monhoc::find($id)->update([
+            'ma_mon' => $request->ma_mon . '-' . $request->buoi,
+            'ten_mon' => $request->ten_mon,
+            // 'so_tin_chi' => $request->so_tin_chi,
+            // 'so_tiet' => $request->so_tiet,
+            'hoc_ky' => $request->hoc_ky,
+            'nam_hoc' => $request->nam_hoc,
+            'so_buoi' => $request->so_buoi,
+        ]);
 
         return redirect()->route('gquan-ly-mon-hoc');
     }
@@ -248,14 +193,15 @@ class Controller extends BaseController
     public function GetquanLyLop()
     {
         $lop = Lop::all();
+        $mh = monhoc::all();
 
-        return view('modules.quanlylop', compact('lop'));
+        return view('modules.quanlylop', compact('lop', 'mh'));
     }
 
     public function PostquanLyLop(LopRequest $request)
     {
         Lop::insert([
-            'malop' => $request->malop,
+            'malop' => $request->mamon,
             'tenlop' => $request->tenlop,
         ]);
 
@@ -265,18 +211,17 @@ class Controller extends BaseController
      public function quanLySinhVien(Request $request){
         if($request->get('query') && $request->get('query')!='')
         {
-            $data=SinhVien::where('malop',$request->get('query'))->get();
+            $sinhvien=SinhVien::where('id_mon',$request->get('query'))->get();
             $query=$request->get('query');
-           
         }
         else{
-            $data=SinhVien::all();
+            $sinhvien=SinhVien::all();
             $query='';
-          
         }
-        $lop=Lop::all();
-        return view('modules.quanlysinhvien',compact('data','lop','query'));
+        $mh = monhoc::all();
+        return view('modules.quanlysinhvien',compact('sinhvien','mh','query'));
     }
+
     public function destroy_sinhvien(Request $request)
     {
         if($request->ajax())
@@ -298,22 +243,26 @@ class Controller extends BaseController
             return (new CheckinExport($request->lop, $request->mon))->download('diemdanh.xlsx');
         }
 
-        if($request->get('lop')!='' && $request->get('mon')!=''){
-            $malop=$request->get('lop');
-            $mamom=$request->get('mon');
-            $data=SinhVien::join('diemdanhs','sinh_viens.masv','=','diemdanhs.masv')
-            ->select('diemdanhs.masv','hoten','mamon',DB::raw('count(buoivang) as bv'))
-            ->groupBy('diemdanhs.masv','hoten','mamon')->where('malop',$malop)->where('mamon',$mamom)->get();
-           
+        if($request->get('id_mon')!=''){
+            $data=SinhVien::join('diemdanh','sinhvien.id','=','diemdanh.id_sinhvien')
+            ->join('monhoc', 'monhoc.id', '=', 'diemdanh.id_mon')
+            ->where('monhoc.id', '=', $request->get('id_mon'))
+            ->select('mssv', 'ho', 'ten', 'so_buoi', 'ma_mon', DB::raw('count(*) as buoi_co_mat'))
+            ->groupBy('mssv', 'ho', 'ten', 'so_buoi', 'ma_mon')->get();
+            // ->join('monhoc', 'monhoc.id', '=', 'diemdanh.id_mon')
+            // ->where('monhoc.id', $request->get('ma_mon'))
+            // ->select('diemdanh.mssv','ho', 'ten', DB::raw('count(*) as buoi_co_mat'))
+            // ->groupBy('diemdanh.mssv', 'ho', 'ten')->get();
+            // $data = SinhVien::all();
         }
         else
         {
             $data=[];
         }
         $monhoc=monhoc::all();
-        $lop=Lop::all();
+
         //dd($data);
-        return view('modules.danhsachdiemdanh',compact('monhoc','lop','data'));
+        return view('modules.danhsachdiemdanh',compact('monhoc','data'));
     }
     public function chiTietBuoiVang($masv,$mon){
         $data=diemdanh::join('sinh_viens','diemdanhs.masv','=','sinh_viens.masv')->where('diemdanhs.masv',$masv)->where('mamon',$mon)->get();
@@ -337,8 +286,19 @@ class Controller extends BaseController
         try{
             if($request->has('Form1'))
             {
-                SinhVien::create($request->all());
-                return redirect()->back();
+                // SinhVien::create($request->all());
+                // return redirect()->back();
+                SinhVien::insert([
+                    'mssv' => $request->mssv,
+                    'ho' => $request->ho,
+                    'ten' => $request->ten,
+                    'gioi_tinh' => $request->gioi_tinh,
+                    'id_mon' => monhoc::find($request->id_mon)->id,
+                ]);
+
+                $sinhvien = SinhVien::all();
+        
+                return redirect()->route('quan-ly-sinh-vien')->with(['message' => 'Thêm thành công!']);
             }
             elseif($request->has('Form2'))
             {
@@ -352,7 +312,7 @@ class Controller extends BaseController
             }
         }
         catch(\Illuminate\Database\QueryException $ex){
-            //
+            echo $ex;
         }
         
     }
@@ -361,19 +321,22 @@ class Controller extends BaseController
         $data=SinhVien::find($id);
         if($data)
         {
-            $lop=Lop::all();
-            return view('modules.updatesinhvien',compact('data','lop'));
+            $mh=monhoc::all();
+            return view('modules.updatesinhvien',compact('data','mh'));
         }
         else
         {
             return redirect()->route('quan-ly-sinh-vien');
         }
     }
+
     public function PostUpdateSinhVien(Request $request,$id){
         SinhVien::find($id)->update([
-            'hoten'=>$request->hoten,
-            'gioitinh'=>$request->gioitinh,
-            'malop'=>$request->malop
+            'mssv' => $request->mssv,
+            'ho' => $request->ho,
+            'ten' => $request->ten,
+            'gioi_tinh' => $request->gioi_tinh,
+            'id_mon' => monhoc::find($request->id_mon)->id,
         ]);
         return redirect()->route('quan-ly-sinh-vien');
     }

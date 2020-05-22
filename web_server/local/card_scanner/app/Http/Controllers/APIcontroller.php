@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\diemdanh;
 use App\SinhVien;
-use App\Lop;
+use App\monhoc;
 use Illuminate\Support\Carbon;
 use Log;
 
@@ -61,23 +61,40 @@ class APIcontroller extends Controller
     public function getCheckinjs(){
         return "Không có quyền truy cập hệ thống điểm danh";
     }
+
     public function postCheckinjs(Request $request){
+        
         $data = $request->json()->all();
+
         $dumps = [];
         foreach ($data as $key => $value) {
-            $dumps[] = array("masv" => $data[$key]['m'], "mamon" => $data[$key]['c'], "buoivang" => $data[$key]['d']);
-        }
-        foreach ($dumps as $key => $value) {
-            try {
-                diemdanh::insert($value);
-            } 
-            catch (\Exception $e) {
-            }
+            $dumps[] = array("mssv" => $data[$key]['m'], "ma_mon" => $data[$key]['c'], "ngay" => $data[$key]['d']);
+
+            $id_mon = monhoc::where('ma_mon', $data[$key]['c'])->get()[0]['id'];
+
+            $id_sinhvien = SinhVien::where('mssv', $data[$key]['m'])->where('id_mon', $id_mon)->get()[0]['id'];
+        
+            diemdanh::insert([
+                'id_sinhvien' => $id_sinhvien,
+                'id_mon' => $id_mon,
+                'thoi_gian' => $data[$key]['d']
+            ]);
         }
 
-        //return response("NAT",200);
+        // Reference
+        // foreach ($dumps as $key => $value) {
+        //     try {
+        //         diemdanh::insert($value);
+        //     } 
+        //     catch (\Exception $e) {
+        //         echo $e;
+        //     }
+        // }
+
+        // return response("NAT",200);
         return response()->json($dumps, 200);
     }
+    
     //requestDataSV
     public function RequestSV(Request $request){
         //nonunicode

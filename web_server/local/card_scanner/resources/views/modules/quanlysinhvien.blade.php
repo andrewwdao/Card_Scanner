@@ -16,34 +16,39 @@
 								<div class="col-lg-6">
 									<div class="form-group">
 										<label>Mã sinh viên</label>
-										<input type="text" class="form-control" placeholder="Nhập mã sinh viên..." name="masv">
-									</div>
-								</div>
-								<div class="col-lg-6">
-									<div class="form-group">
-										<label>Tên sinh viên</label>
-										<input type="text" class="form-control" placeholder="Nhập tên sinh viên..." name="hoten">
+										<input maxlength=8 type="text" class="form-control" placeholder="Nhập mã sinh viên..." name="mssv">
 									</div>
 								</div>
 								<div class="col-lg-6">
 										<div class="form-group">
 											<label>Giới tính</label>
-											<select name="gioitinh" id="" class="form-control">
-												<option value="Nam">Nam</option>
-												<option value="Nữ">Nữ</option>
+											<select name="gioi_tinh" id="" class="form-control">
+												<option value="1">Nam</option>
+												<option value="0">Nữ</option>
 											</select>
 										</div>
 								</div>
 								<div class="col-lg-6">
-										<div class="form-group">
-											<label>Lớp</label>
-											<select name="malop" id="" class="form-control">
-												@foreach($lop as $val)
-												<option value="{{ $val->malop }}">{{ $val->tenlop }}</option>
-												
-												@endforeach
-											</select>
-										</div>
+									<div class="form-group">
+										<label>Họ sinh viên</label>
+										<input maxlength=50 type="text" class="form-control" placeholder="Nhập họ sinh viên..." name="ho">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label>Tên sinh viên</label>
+										<input maxlength=50 type="text" class="form-control" placeholder="Nhập tên sinh viên..." name="ten">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label>Lớp</label>
+										<select name="id_mon" id="" class="form-control">
+											@foreach($mh as $val)
+											<option value="{{ $val->id }}">{{ $val->ma_mon }}</option>
+											@endforeach
+										</select>
+									</div>
 								</div>
 							</div>
 							<div class="text-right">
@@ -78,15 +83,15 @@
 											@endif
 									</div>
 									<div class="col-lg-6">
-											<div class="card-body">
-													<form name="Form2" action="" class="form-inline" method="POST" enctype="multipart/form-data">
-														@csrf
-														<div class="form-group mx-sm-3 mb-2">
-														  <input type="file" class="form-control" name="import-list">
-														</div>
-														<button name="Form2" type="submit" class="btn btn-info mb-2"><i class="fe fe-arrow-up-circle"></i> Nhập dữ liệu     </button>
-													</form>
+										<div class="card-body">
+											<form name="Form2" action="" class="form-inline" method="POST" enctype="multipart/form-data">
+												@csrf
+												<div class="form-group mx-sm-3 mb-2">
+													<input type="file" class="form-control" name="import-list">
 												</div>
+												<button name="Form2" type="submit" class="btn btn-info mb-2"><i class="fe fe-arrow-up-circle"></i> Nhập dữ liệu     </button>
+											</form>
+										</div>
 									</div>
 							</div>
 					</div>
@@ -99,9 +104,9 @@
 						<div class="col-md-6"><h3 class="card-title text-uppercase">Danh sách sinh viên</h3></div>
 						<div class="col-md-6">
 							<select name="" id="lop" class="form-control">
-								<option value="">--Chọn lớp--</option>
-								@foreach($lop as $val)
-								<option @if($val->malop==$query) selected @endif value="{{$val->malop}}">{{$val->tenlop}}</option>
+								<option value="*" selected="selected">--Tất cả các môn--</option>
+								@foreach($mh as $val)
+								<option @if($val->id==$query) @endif value="{{$val->id}}">{{$val->ma_mon}}</option>
 								@endforeach
 							</select>
 						</div>
@@ -120,14 +125,14 @@
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($data as $key=>$val)
+									@foreach($sinhvien as $key=>$val)
 									<tr>
 										<td>{{$key+1}}</td>
 										<!-- <td>{{$val->masv}}</td> -->
 										<td hidden class='id'>{{$val->id}}</td>
-										<td>{{$val->masv}}</td>
-										<td>{{$val->hoten}}</td>
-										<td>{{ $val->gioitinh }}</td>
+										<td>{{$val->mssv}}</td>
+										<td>{{$val->ho . ' ' . $val->ten}}</td>
+										<td>{{ $val->gioi_tinh == '1' ? 'Nam' : 'Nữ' }}</td>
 										<td class="text-right">
 											<a href="{{ route('update-sinh-vien',$val->id) }}" class="btn btn-warning"><i class="fe fe-edit"></i></a>
 											<a  class="btn btn-success delete"><i class="fe fe-delete"></i></a>

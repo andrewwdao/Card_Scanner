@@ -21,8 +21,13 @@
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
-										<label>Mã lớp</label>
-										<input type="text" class="form-control" placeholder="Nhập mã lớp..." name="malop">
+										<label>Tên môn</label>
+										<select name="mamon" id="" class="form-control">
+											@foreach($mh as $val)
+											<option value="{{ $val->mamon }}">{{ $val->tenmon }}</option>
+											
+											@endforeach
+										</select>
 										<p class="text-danger">{{$errors->first('malop')}}</p>
 									</div>
 								</div>

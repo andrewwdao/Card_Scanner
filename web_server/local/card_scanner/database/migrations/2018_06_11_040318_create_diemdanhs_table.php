@@ -21,7 +21,7 @@ class CreateDiemdanhsTable extends Migration
             ->references('masv')->on('sinh_viens')
             ->onDelete('cascade');
             $table->foreign('mamon')
-            ->references('mamon')->on('monhocs')
+            ->references('mamon')->on('monhoc')
             ->onDelete('cascade');
             $table->string('mathe',100)->nullable();
             $table->primary(['masv', 'mamon','buoivang']);

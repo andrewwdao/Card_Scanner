@@ -10,7 +10,7 @@
           <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
             <span class="avatar" style="background-image: url({!!asset('assets/images/boss.png') !!})"></span>
             <span class="ml-2 d-none d-lg-block">
-              <span class="text-default">{{Auth::guard('admin')->user()->taikhoan}}</span>
+              <span class="text-default">{{Auth::guard('admin')->user()->tai_khoan}}</span>
               <small class="text-muted d-block mt-1">Administrator</small>
             </span>
           </a>

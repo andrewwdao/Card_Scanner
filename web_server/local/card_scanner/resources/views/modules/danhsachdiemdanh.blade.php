@@ -14,25 +14,14 @@
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
-										<label>Chọn lớp</label>
-										<select  id="lop" class="form-control" name="lop">
-											@foreach($lop as $val)
-											<option value="{{ $val->malop }}">{{ $val->tenlop }}</option>
+										<label>Chọn môn</label>
+										<select id="id_mon" class="form-control" name="id_mon">
+											@foreach($monhoc as $val)
+											<option value="{{ $val->id }}">{{ $val->ma_mon }}</option>
 											@endforeach
 										</select>
-										<p class="text-danger">{{$errors->first('malop')}}</p>
+										<p class="text-danger">{{$errors->first('ma_mon')}}</p>
 									</div>
-								</div>
-								<div class="col-lg-6">
-										<div class="form-group">
-											<label>Chọn môn</label>
-											<select  id="mon" class="form-control" name="mon">
-												@foreach($monhoc as $val)
-												<option value="{{ $val->mamon }}">{{ $val->tenmon }}</option>
-												@endforeach
-											</select>
-											<p class="text-danger">{{$errors->first('tenlop')}}</p>
-										</div>
 								</div>
 							</div>
 							<div class="text-right">
@@ -111,20 +100,22 @@
 										<th>STT</th>
 										<th>MSSV</th>
 										<th>Tên sinh viên</th>
+										<th>Mã môn</th>
 										<th class="text-center">Số buổi có mặt</th>
-										<th class="text-right">Chức năng</th>
+										<!-- <th class="text-right">Chức năng</th> -->
 									</tr>
 								</thead>
 								<tbody>
 									@foreach($data as $key=> $val)
 									<tr>
 										<td>{{ $key+1 }}</td>
-										<td>{{ $val->masv }}</td>
-										<td>{{ $val->hoten }}</td>
-										<td class="text-center">{{ $val->bv }}</td>
-										<td class="text-right">
-											<a href="{{ url('quan-ly/chi-tiet-buoi-vang/'.$val->masv.'/'.$val->mamon) }}" class="btn btn-success"><i class="fe fe-eye"></i> Xem chi tiết</a>
-										</td>
+										<td>{{ $val->mssv }}</td>
+										<td>{{ $val->ho . ' ' . $val->ten }}</td>
+										<td>{{ $val->ma_mon }}</td>
+										<td class="text-center">{{ $val->buoi_co_mat . '/' . $val->so_buoi }}</td>
+										<!-- <td class="text-right">
+											<a href="{{ url('quan-ly/chi-tiet-buoi-vang/'.$val->id_sinhvien.'/'.$val->mamon) }}" class="btn btn-success"><i class="fe fe-eye"></i> Xem chi tiết</a>
+										</td> -->
 									</tr>
 									@endforeach
 

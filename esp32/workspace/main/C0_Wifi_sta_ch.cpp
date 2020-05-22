@@ -384,7 +384,7 @@ char HTTP_send() {
       SendString += ']'; //finish the sending string, pseudo JSON
       D_PRINTLN(SendString);
       //--------------------------HTTP TIME--
-      HTTPClient http;   
+      HTTPClient http;
       http.begin("http://"+NVS_WebAP_read()+SEND_API);  //Specify destination for HTTP request
       http.addHeader("Content-Type", "text/plain");     //Specify content-type header
       int HTTPcode = http.POST(SendString);
@@ -392,6 +392,7 @@ char HTTP_send() {
       if ((HTTPcode==200)||(HTTPres=="NAT")) {//if sending successfully, HTTP_CODE_OK=200
         D_PRINTLN(HTTPres);
       } else { //if 1 among packages failed to send --> failed
+        D_PRINTLN(HTTPres);
         D_PRINTLN(MES_GER);D_PRINTLN(HTTPcode);
         http.end();  //Free resources
         SD_chosenFile.close();

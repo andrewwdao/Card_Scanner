@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class SinhVien extends Model
 {
 
-    protected $table = 'sinh_viens';
-    protected $fillable=['id','masv','hoten','gioitinh','malop'];
-    public $timestamps=true;
-    public function lop()
-    {
-        return $this->belongsTo('App\Lop');
-    }
+    protected $table = 'sinhvien';
+    protected $fillable=['mssv','ho','ten','gioi_tinh', 'id_mon'];
+    public $timestamps=false;
+    // public function lop()
+    // {
+    //     return $this->belongsTo('App\Lop');
+    // }
 
 
 }

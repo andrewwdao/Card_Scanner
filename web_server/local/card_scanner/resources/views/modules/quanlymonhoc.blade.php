@@ -16,31 +16,43 @@
 								<div class="col-lg-6">
 									<div class="form-group">
 										<label>Mã môn</label>
-										<input type="text" class="form-control" placeholder="Nhập mã môn..." name="mamon" value="{{old('mamon')}}">
-										<p class="text-danger">{{$errors->first('mamon')}}</p>
+										<input type="text" maxlength="5" class="form-control" placeholder="Nhập mã môn..." name="ma_mon" value="{{old('ma_mon')}}">
+										<p class="text-danger">{{$errors->first('ma_mon')}}</p>
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group">
 										<label>Tên môn</label>
-										<input type="text" class="form-control" placeholder="Nhập tên môn..." name="tenmon" value="{{old('tenmon')}}">
-										<p class="text-danger">{{$errors->first('tenmon')}}</p>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-6">
-									<div class="form-group">
-										<label>Số tín chỉ</label>
-										<input type="text" class="form-control" placeholder="Nhập số tín chỉ..." name="sotinchi" value="{{old('sotinchi')}}">
-										<p class="text-danger">{{$errors->first('sotinchi')}}</p>
+										<input type="text" class="form-control" placeholder="Nhập tên môn..." name="ten_mon" value="{{old('ten_mon')}}">
+										<p class="text-danger">{{$errors->first('ten_mon')}}</p>
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group">
-										<label>Số tiết</label>
-										<input type="text" class="form-control" placeholder="Nhập số tiết..." name="sotiet" value="{{old('sotiet')}}">
-										<p class="text-danger">{{$errors->first('sotiet')}}</p>
+										<label>Học kỳ</label>
+										<input maxlength=1 type="text" class="form-control" placeholder="Học kỳ..." name="hoc_ky" value="{{old('hoc_ky')}}">
+										<p class="text-danger">{{$errors->first('hoc_ky')}}</p>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label>Năm học</label>
+										<input maxlength=4 type="text" class="form-control" placeholder="Năm học..." name="nam_hoc" value="{{old('nam_hoc')}}">
+										<p class="text-danger">{{$errors->first('nam_hoc')}}</p>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label>Buổi</label>
+										<input type="text" maxlength="2" class="form-control" placeholder="Nhập buổi..." name="buoi" value="{{old('buoi')}}">
+										<p class="text-danger">{{$errors->first('buoi')}}</p>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label>Số buổi</label>
+										<input type="text" maxlength="3" class="form-control" placeholder="Nhập buổi..." name="so_buoi" value="{{old('so_buoi')}}">
+										<p class="text-danger">{{$errors->first('so_buoi')}}</p>
 									</div>
 								</div>
 							</div>
@@ -63,10 +75,9 @@
 								<thead>
 									<tr>
 										<th>STT</th>
-										<th>Môn học</th>
 										<th>Mã môn</th>
-										<th>Số tín chỉ</th>
-										<th>Số tiết</th>
+										<th>Tên môn</th>
+										<th>Số buổi</th>
 										<th class="text-right">Chức năng</th>
 									</tr>
 								</thead>
@@ -75,10 +86,9 @@
 									<tr>
 										<td>{{$key+1}}</td>
 										<td hidden class='id'>{{$val->id}}</td>
-										<td>{{$val->tenmon}}</td>
-										<td>{{$val->mamon}}</td>
-										<td>{{$val->sotinchi}}</td>
-										<td>{{$val->sotiet}}</td>
+										<td>{{$val->ma_mon}}</td>
+										<td>{{$val->ten_mon}}</td>
+										<td>{{$val->so_buoi}}</td>
 										<td class="text-right">
 											<a href="{{route('gupdatemh',$val->id)}}" class="btn btn-warning" id="edit"><i class="fe fe-edit"></i></a>
 											<button class="btn btn-danger delete"><i class="fe fe-trash"></i></button>

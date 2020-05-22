@@ -15,20 +15,44 @@
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
+										<label>Mã môn</label>
+										<input type="text" maxlength="5" class="form-control" placeholder="Nhập mã môn..." name="ma_mon" value="{{substr($up->ma_mon,0,5)}}">
+										<p class="text-danger">{{$errors->first('ma_mon')}}</p>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
 										<label>Tên môn</label>
-									<input type="text" class="form-control" placeholder="Nhập tên môn..." name="tenmon" value="{{$up->tenmon}}">
+										<input type="text" class="form-control" placeholder="Nhập tên môn..." name="ten_mon" value="{{$up->ten_mon}}">
+										<p class="text-danger">{{$errors->first('ten_mon')}}</p>
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group">
-										<label>Số tín chỉ</label>
-										<input type="text" class="form-control" placeholder="Nhập số tín chỉ..." name="sotinchi" value="{{$up->sotinchi}}">
+										<label>Học kỳ</label>
+										<input maxlength=1 type="text" class="form-control" placeholder="Học kỳ..." name="hoc_ky" value="{{$up->hoc_ky}}">
+										<p class="text-danger">{{$errors->first('hoc_ky')}}</p>
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group">
-										<label>Số tiết</label>
-									<input type="text" class="form-control" placeholder="Nhập số tiết..." name="sotiet" value="{{$up->sotiet}}">
+										<label>Năm học</label>
+										<input maxlength=4 type="text" class="form-control" placeholder="Năm học..." name="nam_hoc" value="{{$up->nam_hoc}}">
+										<p class="text-danger">{{$errors->first('nam_hoc')}}</p>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label>Buổi</label>
+										<input type="text" maxlength="2" class="form-control" placeholder="Nhập buổi..." name="buoi" value="{{substr($up->ma_mon,6,2)}}">
+										<p class="text-danger">{{$errors->first('buoi')}}</p>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label>Số buổi</label>
+										<input type="text" maxlength="3" class="form-control" placeholder="Nhập số buổi..." name="so_buoi" value="{{$up->so_buoi}}">
+										<p class="text-danger">{{$errors->first('so_buoi')}}</p>
 									</div>
 								</div>
 							</div>
@@ -53,7 +77,7 @@
 										<th>STT</th>
 										<th>Môn học</th>
 										<th>Số tín chỉ</th>
-										<th>Số tiết</th>
+										<th>Số buổi</th>
 										{{-- <th class="text-right">Chức năng</th> --}}
 									</tr>
 								</thead>
@@ -61,9 +85,14 @@
 									@foreach($mh as $key=>$val)
 									<tr>
 										<td>{{$key+1}}</td>
-										<td>{{$val->tenmon}}</td>
-										<td>{{$val->sotinchi}}</td>
-										<td>{{$val->sotiet}}</td>
+										<td hidden class='id'>{{$val->ma_mon}}</td>
+										<td>{{$val->ma_mon}}</td>
+										<td>{{$val->ten_mon}}</td>
+										<td>{{$val->so_buoi}}</td>
+										<td class="text-right">
+											<a href="{{route('gupdatemh',$val->ma_mon)}}" class="btn btn-warning" id="edit"><i class="fe fe-edit"></i></a>
+											<button class="btn btn-danger delete"><i class="fe fe-trash"></i></button>
+										</td>
 									</tr>
 									@endforeach
 
@@ -76,4 +105,26 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	
+		$('.delete').click(function (e) { 
+			var t=$(this).closest('tr').find('.id').text()
+			$.ajax({
+				type: "post",
+				url: "{{route('ajax_delete_monhoc')}}",
+				data: {
+					'_token':"{{csrf_token()}}",
+					'id':t
+				},
+	
+				success: function (response) {
+					response=='ok'? location.reload():''
+				}
+			});
+			
+		});
+  
+</script>
+
 @endsection

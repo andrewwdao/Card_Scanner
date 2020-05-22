@@ -12,6 +12,18 @@ git clone --recursive https://github.com/minhan74/Card_Scanner.git
 git submodule update --init --recursive
 ```
 
+## Documentation
+
+* **[Full Report]**: detailed explaination on how we create this system and how to use it (school scientific research report - in Vietnamese).
+* **[Hardware assembling instruction]**: how to re-create the hardware (extracted from the full report - in Vietnamese).
+* **[Hardware files]**: ready-to-print parts of the cover and PCB.
+* **[ESP32 - How to use the device]**: Guidance on how to properly setup the device for usage (extracted from the full report - in Vietnamese).
+* **[ESP32 - Flash Instruction]**: Instruction on how to flash a ready-to-use binary file to esp32 (in English).
+* **[ESP32 - Prepare Developing Environment]**: Guidance on how to prepare an appropriate developing environment for esp32 (in English).
+* **[Web server - How to use]**: How to use the web server (in Vietnamese).
+* **[Web server - Create localhost server]**: How to create a localhost server for locally use (in Vietnamese).
+* **[Web server - Create globalhost server]**: How to create a globalhost server for internet use (in Vietnamese).
+
 This project aims to create a portable device that is used to check student attendance based on their student ID card.
 
 This project includes two main components:
@@ -53,26 +65,18 @@ Run on both core of an ESP32 using FreeRTOS. Compiled by ESP-IDF with Arduino co
 * Compiler version: 5.2.0
 * Arduino components version: 1.0.2
 
+![device](docs/pictures/device.jpg)
+
 ## Web Server
 
-Written in PHP 7.4.6
+Written in PHP 7.3.18
 
 Based on:
 
-* Xampp v7.4.6
+* Xampp v7.3.18
 * Lavarel framework 5.6.22
 
-## Documentation
-
-* **[Full Report]**: detailed explaination on how we create this system and how to use it (school scientific research report - in Vietnamese).
-* **[Hardware assembling instruction]**: how to re-create the hardware (extracted from the full report - in Vietnamese).
-* **[Hardware files]**: ready-to-print parts of the cover and PCB.
-* **[ESP32 - How to use the device]**: Guidance on how to properly setup the device for usage (extracted from the full report - in Vietnamese).
-* **[ESP32 - Flash Instruction]**: Instruction on how to flash a ready-to-use binary file to esp32 (in English).
-* **[ESP32 - Prepare Developing Environment]**: Guidance on how to prepare an appropriate developing environment for esp32 (in English).
-* **[Web server - How to use]**: How to use the web server (in Vietnamese).
-* **[Web server - Create localhost server]**: How to create a localhost server for locally use (in Vietnamese).
-* **[Web server - Create globalhost server]**: How to create a globalhost server for internet use (in Vietnamese).
+![web_server](docs/pictures/web_server.jpg)
 
 ## Sponsor by
 
@@ -95,7 +99,7 @@ Based on:
  (c) 2019 Quang-Thong Duong-Pham <baronvn7197@gmail.com> - Quang-Nhut Tran <nhut1202@gmail.com> - Anh-Khoi Tran <khoitrananh.20@gmail.com> - Minh-An Dao <minhan7497@gmail.com> - Can Tho University.
 
 <!-- Links -->
-[Full Report]:/notavailable_yet
+[Full Report]:https://bit.ly/card_scanner
 [Hardware assembling instruction]:/docs/[Hardware]How_to_assemble.pdf
 [Hardware files]: /hardware/
 [ESP32 - How to use the device]:/docs/[ESP32]How_to_use_device.pdf

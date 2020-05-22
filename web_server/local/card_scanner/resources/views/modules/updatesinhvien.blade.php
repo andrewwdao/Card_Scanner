@@ -11,39 +11,44 @@
 					</div>
 					<div class="card-body">
 						<form action="" method="post">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
 										<label>Mã sinh viên</label>
-										<input type="text" class="form-control" disabled value="{{ $data->masv }}" >
-									</div>
-								</div>
-								<div class="col-lg-6">
-									<div class="form-group">
-										<label>Tên sinh viên</label>
-										<input type="text" class="form-control" value="{{ $data->hoten }}" name="hoten">
+										<input maxlength=8 type="text" class="form-control" placeholder="Nhập mã sinh viên..." name="mssv" value={{$data->mssv}}>
 									</div>
 								</div>
 								<div class="col-lg-6">
 										<div class="form-group">
 											<label>Giới tính</label>
-											<select name="gioitinh" id="" class="form-control">
-												<option @if($data->gioitinh=='Nam') selected  @endif value="Nam">Nam</option>
-												<option @if($data->gioitinh=='Nữ') selected  @endif value="Nữ">Nữ</option>
+											<select name="gioi_tinh" id="" class="form-control">
+												<option @if($data->gioi_tinh=='1') selected  @endif value="Nam">Nam</option>
+												<option @if($data->gioi_tinh=='0') selected  @endif value="Nữ">Nữ</option>
 											</select>
 										</div>
 								</div>
 								<div class="col-lg-6">
-										<div class="form-group">
-											<label>Lớp</label>
-											<select name="malop" id="" class="form-control">
-												@foreach($lop as $val)
-												<option @if($data->malop==$val->malop) selected @endif value="{{ $val->malop }}">{{ $val->tenlop }}</option>
-												
-												@endforeach
-											</select>
-										</div>
+									<div class="form-group">
+										<label>Họ sinh viên</label>
+										<input maxlength=50 type="text" class="form-control" placeholder="Nhập họ sinh viên..." name="ho" value={{$data->ho}}>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label>Tên sinh viên</label>
+										<input maxlength=50 type="text" class="form-control" placeholder="Nhập tên sinh viên..." name="ten" value={{$data->ten}}>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label>Lớp</label>
+										<select name="id_mon" id="" class="form-control">
+											@foreach($mh as $val)
+											<option @if($data->id_mon == $val->id) selected @endif value="{{ $val->id }}">{{ $val->ma_mon }}</option>
+											@endforeach
+										</select>
+									</div>
 								</div>
 							</div>
 							<div class="text-right">
