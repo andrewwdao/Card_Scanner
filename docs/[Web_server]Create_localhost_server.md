@@ -1,10 +1,8 @@
 # HƯỚNG DẪN TẠO SERVER LOCAL
 
-- Hai ứng dụng nền tảng cơ bản để dựng và chạy localhost trên máy tính cá nhân:
+- Để chạy localhost, ta cần cài đặt:
 
-[Xampp](https://www.apachefriends.org/index.html)
-
-[Git](https://git-scm.com/)
+[Xampp v7.3.18](https://www.apachefriends.org/xampp-files/7.3.18/xampp-windows-x64-7.3.18-0-VC15-installer.exe)
 
 - **Bước 0:** Đưa php vào system path:
 
@@ -44,7 +42,7 @@
 
   ![local08](pictures/local08.png)
 
-- **Bước 4:** Nếu muốn thay đổi database, truy cập vào tệp tin _DatabaseSeeder.php_ theo đường dẫn C:\xampp\htdocs\card_scanner\database\seeds. Thay đổi thông tin tài khoản đăng nhập mong muốn:
+- **Bước 4:** Mặc định, hệ thống đã có tài khoản admin. Nếu muốn thay đổi tài khoản admin, xóa admin cũ trong bảng admin từ database countstd trong phpMyAdmin, sau đó truy cập vào tệp tin _DatabaseSeeder.php_ theo đường dẫn C:\xampp\htdocs\card_scanner\database\seeds. Thay đổi thông tin tài khoản đăng nhập mong muốn:
 
 ```python
 class seedAdmin extends Seeder
@@ -65,7 +63,7 @@ class seedAdmin extends Seeder
 cd C:\xampp\htdocs\card_scanner
 ```
 
-- **Bước 6:** Thực thi thay đổi cơ sở dữ liệu (nếu có):
+- **Bước 6:** Thực thi thay đổi cơ sở dữ liệu (LƯU Ý: nếu gặp lỗi, thì kiểm tra lại bảng admin từ database và đảm bảo không có tài khoản admin bị trùng):
 
 ```bash
 php artisan db:seed

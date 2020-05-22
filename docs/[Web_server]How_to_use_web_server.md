@@ -1,6 +1,6 @@
 # HƯỚNG DẪN SỬ DỤNG HỆ THỐNG (ĐÃ CÀI ĐẶT)
 
-- Người dùng sẽ sử dụng trình duyệt web để truy cập vào trang đăng nhập của hệ thống (localhost:8000 hoặc tên miền global nếu đã cập nhật lên server).
+- Người dùng sẽ sử dụng trình duyệt web để truy cập vào trang đăng nhập của hệ thống (localhost:2020 hoặc tên miền global nếu đã cập nhật lên server).
 
   ![Login menu 1](pictures/login01.png)
 
@@ -35,7 +35,7 @@
 
 - File excel phải được định dạng gồm 5 cột. Cột A là số thứ tự, Cột B chứa Mã số sinh viên, Cột C chứ tên đầy đủ của sinh viên (có dấu hoặc không dấu – có thể chứa ký tự trống ở cuối nhưng không khuyến khích), Cột D là giới tính (Nam hoặc Nữ), Cột E chưa Mã lớp để liên kết với danh sách sinh viên tương ứng. File Excel có thể được lưu dưới tên bất kì.
 - Nhấp chọn nút Choose File trong mục Nhập dữ liệu từ excel, trỏ tới đường dẫn chứa file excel trên máy tính và nhấn Open. Sau đó nhấp chọn nút Nhập dữ liệu. Khi nhập dữ liệu thành công ta có thể xem danh sách sinh viên ở mục Danh sách sinh viên bên dưới.
-- Để xem danh sách sinh viên đã điểm danh, ta nhấp chọn danh mục Danh sách điểm danh ở Tab bên trái. 
+- Để xem danh sách sinh viên đã điểm danh, ta nhấp chọn danh mục Danh sách điểm danh ở Tab bên trái.
 
   ![mainpage05](pictures/mainpage05.png)
 
