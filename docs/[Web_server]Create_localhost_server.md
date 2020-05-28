@@ -72,9 +72,9 @@ php artisan db:seed
 - **Bước 7:** Tiến hành chạy server:
 
 ```bash
-php artisan serve --port=8000
+php artisan serve --port=2020
 ```
 
 ![local09](pictures/local09.png)
 
-- **Bước 8:** Truy cập _<http://localhost:8000>_ để truy cập hệ thống
+- **Bước 8:** Truy cập _<http://localhost:2020>_ hoặc nhấp đúp vào shortcut _Card Scanner Web Server_ (C:\xampp\htdocs\card_scanner) để truy cập hệ thống.

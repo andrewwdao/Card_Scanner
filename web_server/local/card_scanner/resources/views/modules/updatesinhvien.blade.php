@@ -23,8 +23,8 @@
 										<div class="form-group">
 											<label>Giới tính</label>
 											<select name="gioi_tinh" id="" class="form-control">
-												<option @if($data->gioi_tinh=='1') selected  @endif value="Nam">Nam</option>
-												<option @if($data->gioi_tinh=='0') selected  @endif value="Nữ">Nữ</option>
+												<option @if($data->gioi_tinh=='1') selected  @endif value="1">Nam</option>
+												<option @if($data->gioi_tinh=='0') selected  @endif value="0">Nữ</option>
 											</select>
 										</div>
 								</div>
