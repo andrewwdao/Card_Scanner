@@ -14,6 +14,8 @@ git submodule update --init --recursive
 
 ## Documentation
 
+This project aims to create a portable device that is used to check student attendance based on their student ID card.
+
 * **[Full Report]**: detailed explaination on how we create this system and how to use it (school scientific research report - in Vietnamese).
 * **[Hardware assembling instruction]**: how to re-create the hardware (extracted from the full report - in Vietnamese).
 * **[Hardware files]**: ready-to-print parts of the cover and PCB.
@@ -23,8 +25,6 @@ git submodule update --init --recursive
 * **[Web server - How to use]**: How to use the web server (in Vietnamese).
 * **[Web server - Create localhost server]**: How to create a localhost server for locally use (in Vietnamese).
 * **[Web server - Create globalhost server]**: How to create a globalhost server for internet use (in Vietnamese).
-
-This project aims to create a portable device that is used to check student attendance based on their student ID card.
 
 This project includes two main components:
 

@@ -2,7 +2,8 @@
 
 - Để chạy localhost, ta cần cài đặt:
 
-[Xampp v7.3.18](https://www.apachefriends.org/xampp-files/7.3.18/xampp-windows-x64-7.3.18-0-VC15-installer.exe)
+[Xampp v7.3.18 x64](https://www.apachefriends.org/xampp-files/7.3.18/xampp-windows-x64-7.3.18-0-VC15-installer.exe)
+[Xampp v7.3.2 x32](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/7.3.2/xampp-portable-win32-7.3.2-0-VC15-installer.exe/download)
 
 - **Bước 0:** Đưa php vào system path:
 
