@@ -96,7 +96,7 @@ Based on:
 * Mr. Anh-Khoi Tran was responsible for database and web server improving.
 * Mr. Minh-An Dao was responsible for embedded software development.
 
- (c) 2019 Quang-Thong Duong-Pham <baronvn7197@gmail.com> - Quang-Nhut Tran <nhut1202@gmail.com> - Anh-Khoi Tran <khoitrananh.20@gmail.com> - Minh-An Dao <minhan7497@gmail.com> - Can Tho University.
+ (c) 2019 Quang-Thong Duong-Pham <baronvn7197@gmail.com> - Quang-Nhut Tran <nhut1202@gmail.com> - Anh-Khoi Tran <khoitrananh.20@gmail.com> - Minh-An Dao <darns.smiths.9f@icloud.com> - Can Tho University.
 
 <!-- Links -->
 [Full Report]:https://bit.ly/card_scanner
